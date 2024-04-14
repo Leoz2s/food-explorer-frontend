@@ -1,11 +1,11 @@
-import {styled} from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
   justify-content: center;
-  
-  margin-top: 10.6rem;
 
+  margin-top: 10.6rem;
+  
   > h1 {
     display: flex;
     justify-content: center;

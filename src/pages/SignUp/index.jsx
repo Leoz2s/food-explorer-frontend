@@ -1,37 +1,47 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-import {Container} from "./styles";
+import { Container } from "./styles";
 import {Input} from "../../components/Input";
 import {Button} from "../../components/Button";
 import {ButtonText} from "../../components/ButtonText";
 
 import logo from "../../assets/icons/Polygon.svg";
 
-export function SignIn() {
+export function SignUp() {
   const navigate = useNavigate();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin() {
-    if(!email || !password) {
-      alert("Você precisa preencher os campos de email e senha para fazer Login.");
+  function handleSignUp() {
+    if(!name || !email || !password) {
+      alert("Você precisa preencher os campos de nome, email e senha para cadastrar sua conta.");
     };
     return
   };
 
-  function handleRedirectToSignUp() {
-    navigate("/register");
+  function handleReturn() {
+    navigate("/");
   };
 
-  return(
-    <Container>
+  return (
+    <Container >
       <h1><img src={logo} alt="food explorer logo" /> food explorer</h1>
 
       <form>
         <div className="input-wrapper">
+          <p>Seu nome</p>
+          <Input 
+            placeholder="Exemplo: Maria da Silva" 
+            onChange={e => setName(e.target.value)}
+          />
+        </div>
+
+        <div className="input-wrapper">
           <p>Email</p>
           <Input 
+            type="email"
             placeholder="Exemplo: examplo@exemplo.com.br" 
             onChange={e => setEmail(e.target.value)}
           />
@@ -41,16 +51,16 @@ export function SignIn() {
           <p>Senha</p>
           <Input 
             type="password"
-            placeholder="No mínimo 6 caracteres" 
+            placeholder="No mínimo 6 caracteres"
             onChange={e => setPassword(e.target.value)}
           />
         </div>
 
         <Button 
-          text="Entrar"
-          onClick={handleLogin}
+          text="Criar conta"
+          onClick={handleSignUp}
         />
-        <ButtonText text="Criar uma conta" onClick={handleRedirectToSignUp} /> 
+        <ButtonText text="Já tenho uma conta" onClick={handleReturn} />
       </form>
     </Container>
   );
