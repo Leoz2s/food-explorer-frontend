@@ -19,7 +19,8 @@ export default createGlobalStyle`
     background-color: ${({theme}) => theme.DARK.DARK_400};
   }
 
-  a {
+  a, button {
     text-decoration: none;
+    cursor: pointer;
   }
 `;
