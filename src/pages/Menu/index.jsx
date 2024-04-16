@@ -1,30 +1,43 @@
-import {Container, MenuItem} from "./styles";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
+import {Container, Header, Main, MenuItem} from "./styles";
 import {Input} from "../../components/Input";
 import {Footer} from "../../components/Footer";
 
-import closeIcon from "../../assets/icons/Close.svg"
+import closeIcon from "../../assets/icons/Close.svg";
+import SearchIcon from "../../assets/icons/Search.svg";
 
 export function Menu() {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState();
+
   const isAdmin = true;
 
   return(
     <Container >
-      <header>
-        <img src={closeIcon} alt="Close icon" />
+      <Header>
+        <Link to="/">
+          <img src={closeIcon} alt="Close icon" />
+        </Link>
         <h1>Menu</h1>
-      </header>
+      </Header>
 
-      <main>
-        <Input placeholder="Busque por pratos ou ingredientes" />
-
-        { isAdmin &&
-          <h2>Novo prato</h2>
-        }
+      <Main>
+        <Input 
+          type="text"
+          placeholder="Busque por pratos ou ingredientes" 
+          Icon={SearchIcon}
+          onChange={e => setSearch(e.target.value)}
+        />
           
         <MenuItem>
-          <h2>Sair</h2>
+          { isAdmin &&
+            <p>Novo prato</p>
+          }
+          <p>Sair</p>
         </MenuItem>
-      </main>
+      </Main>
 
       <Footer />
     </Container>

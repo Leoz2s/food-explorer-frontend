@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { Container } from "./styles";
 
 import MenuIcon from "../../assets/icons/Menu.svg";
@@ -7,7 +9,9 @@ import ReceiptIcon from "../../assets/icons/Receipt.svg";
 export function Header({...rest}) {
   return(
     <Container {...rest} >
-      <img src={MenuIcon} alt="Menu icon" />
+      <Link to="/menu">
+        <img src={MenuIcon} alt="Menu icon" />
+      </Link>
 
       <h1><img src={logo} alt="food explorer logo" /> food explorer</h1>
 
