@@ -17,6 +17,15 @@ export const Container = styled.header`
     font-family: Roboto, sans-serif;
     font-weight: 700;
     font-size: 2.1rem;
+
+    cursor: pointer;
+  }
+
+  > span {
+    font-size: 1.2rem;
+    color: ${({theme}) => theme.TINTS.CAKE_100};
+    
+    margin-left: -1.6rem;
   }
   
   > .receipt-wrapper {

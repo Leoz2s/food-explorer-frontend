@@ -9,4 +9,13 @@ export const Container = styled.a`
 
   outline-width: .1rem;
   outline-color: ${({theme}) => theme.LIGHT.LIGHT_100};
+
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+
+  > img {
+    height: 2.2rem;
+    width: 2.2rem;
+  }
 `;

@@ -11,4 +11,8 @@ export const Container = styled.button`
   font-weight: 500;
   font-size: 1.4rem;
   color: ${({theme}) => theme.LIGHT.LIGHT_100};
+
+  display: flex;
+  align-items: center;
+  gap: .5rem;
 `;

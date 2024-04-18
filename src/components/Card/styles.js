@@ -5,13 +5,15 @@ export const Container = styled.div`
   height: 29.2rem;
   padding: 2.4rem;
   background-color: ${({theme}) => theme.DARK.DARK_200};
-  border: 1px solid var(${({theme}) => theme.DARK.DARK_300});
+  border: 1px solid ${({theme}) => theme.DARK.DARK_300};
   border-radius: 8px;
 
   display: grid;
   justify-items: center;
   align-content: center;
   gap: 1.2rem;
+  
+  flex-shrink: 0;
 
   position: relative;
 
@@ -29,7 +31,7 @@ export const Container = styled.div`
     width: var(--image-size);
   }
 
-  > p {
+  > p, a p {
     font-family: Poppins;
     font-size: 1.4rem;
     font-weight: 500;

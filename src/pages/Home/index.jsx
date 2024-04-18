@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import {Container, Message} from "./styles";
+import {Container, Message, Main} from "./styles";
 import {Header} from "../../components/Header";
 import {Card} from "../../components/Card";
 import {Footer} from "../../components/Footer";
@@ -16,6 +16,8 @@ export function Home() {
   const [dishes, setDishes] = useState([]);
   const [favorites, setFavorites] = useState({});
 
+  const role = "admin";
+
   useEffect(() => {
     setDishes(
       [{
@@ -23,21 +25,21 @@ export function Home() {
         image: `${dish_mask}`,
         name: "Salada Ravanello",
         price: "R$ 49,97",
-        role: "user",
+        role: `${role}`,
       },
       {
         id: 2,
         image: `${dish_mask_1}`,
         name: "Spaguetti Gambe",
         price: "R$ 79,97",
-        role: "user",
+        role: `${role}`,
       },
       {
         id: 3,
         image: `${dish_mask_2}`,
         name: "Salada Ravanello",
         price: "R$ 49,97",
-        role: "user",
+        role: `${role}`,
       },
     ]);
     setFavorites(
@@ -54,7 +56,7 @@ export function Home() {
     <Container >
       <Header />
 
-      <main>
+      <Main>
         <Message>
           <img src={message_image} alt="Food image" />
           <div id="message-content">
@@ -89,7 +91,7 @@ export function Home() {
             ))
           }
         </div>
-      </main>
+      </Main>
 
       <Footer />
     </Container>

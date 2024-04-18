@@ -20,6 +20,7 @@ export default createGlobalStyle`
   }
 
   a, button {
+    color: ${({theme}) => theme.LIGHT.LIGHT_100};
     text-decoration: none;
     cursor: pointer;
   }

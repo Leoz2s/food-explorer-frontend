@@ -10,16 +10,21 @@ import SearchIcon from "../../assets/icons/Search.svg";
 
 export function Menu() {
   const navigate = useNavigate();
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
 
   const isAdmin = true;
+
+  function handleCloseMenu() {
+    navigate(-1);
+  };
+  function redirectToNewDish() {
+    navigate("/new-dish");
+  };
 
   return(
     <Container >
       <Header>
-        <Link to="/">
-          <img src={closeIcon} alt="Close icon" />
-        </Link>
+        <img src={closeIcon} alt="Close icon" onClick={handleCloseMenu}/>
         <h1>Menu</h1>
       </Header>
 
@@ -33,7 +38,7 @@ export function Menu() {
           
         <MenuItem>
           { isAdmin &&
-            <p>Novo prato</p>
+            <p onClick={redirectToNewDish} >Novo prato</p>
           }
           <p>Sair</p>
         </MenuItem>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 import { Container } from "./styles";
 import {Button} from "../Button";
@@ -10,6 +11,7 @@ import editIcon from "../../assets/icons/Pencil.svg"
 import caretRightIcon from "../../assets/icons/CaretRight.svg"
 
 export function Card({data, favorites, ...rest}) {
+  const navigate = useNavigate();
   const [amountValue, setAmountValue] = useState(0);
   const [favorited, setFavorited] = useState(false);
 
@@ -22,12 +24,12 @@ export function Card({data, favorites, ...rest}) {
     setFavorited(false);
   };
 
-  function addDish() {
-    console.log(`${amountValue} pratos de ${data.name} foram adicionados!`)
+  function redirectToEditDish() {
+    navigate(`/edit-dish/${data.id}`);
   };
 
-  function editDish() {
-    console.log("Edit dish.")
+  function addDish() {
+    console.log(`${amountValue} pratos de ${data.name} foram adicionados!`)
   };
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export function Card({data, favorites, ...rest}) {
         data.role === "admin" &&  
         <img src={editIcon} alt="ícone de edição" 
           className="action-icon"
-          onClick={editDish}
+          onClick={redirectToEditDish}
         />
         ||
         favorited === false && <img 
@@ -59,14 +61,19 @@ export function Card({data, favorites, ...rest}) {
           onClick={removeFromFavorites}
         />
       }
-
       <img src={data.image} alt="Foto do prato." className="dish-image" />
-      <p>{data.name} <img src={caretRightIcon} /></p>
-
+      
+      <Link to={`/details/${data.id}`}>
+        <p>{data.name} <img src={caretRightIcon} /></p>
+      </Link>
       <span>{data.price}</span>
-      <NumericStepper amountvalue={setAmountValue} />
 
-      <Button text="Incluir" onClick={addDish} />
+      { data.role !== "admin" &&
+        <NumericStepper amountvalue={setAmountValue} />
+      }
+      { data.role !== "admin" &&
+        <Button text="Incluir" onClick={addDish} />
+      }
     </Container>
   );
 };

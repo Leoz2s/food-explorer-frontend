@@ -1,24 +1,15 @@
 import {styled} from 'styled-components';
 
 export const Container = styled.div`
+  width: 100%;
+
+  height: 100vh;
   display: grid;
-  justify-content: center;
-
-  > main {
-    display: grid;
-    justify-content: center;
-
-    padding-left: 2.4rem;
-
-    .dishes-group {
-      margin-block: 2.4rem;
-
-      display: flex;
-      gap: 1.6rem;
-
-      overflow-x: scroll;
-    }
-  }
+  grid-template-areas:
+    "Header"
+    "Main"
+    "Footer";
+  grid-template-rows: 11.4rem auto 7.7rem;
 `;
 
 export const Message = styled.div`
@@ -40,11 +31,11 @@ export const Message = styled.div`
 
       position: absolute;
       top: -3rem;
-      left: -3rem;
+      left: -3.4rem;
     }
 
     > #message-content {
-      margin-left: 14.5rem;
+      margin-left: 14.1rem;
 
       font-family: Poppins, sans-serif;
       color: ${({theme}) => theme.LIGHT.LIGHT_300};
@@ -63,4 +54,20 @@ export const Message = styled.div`
         font-size: 1.2rem;
       }
     }
+`;
+
+export const Main = styled.main`
+  display: grid;
+  justify-content: center;
+
+  padding-left: 2.4rem;
+
+  .dishes-group {
+    margin-block: 2.4rem;
+
+    display: flex;
+    gap: 1.6rem;
+
+    overflow-x: scroll;
+  }
 `;

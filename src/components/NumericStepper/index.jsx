@@ -5,7 +5,7 @@ import { Container } from "./styles";
 import MinusIcon from "../../assets/icons/Minus.svg";
 import PlusIcon from "../../assets/icons/Plus.svg";
 
-export function NumericStepper({amountvalue,...rest}) {
+export function NumericStepper({amountvalue, ...rest}) {
   const [amount, setAmount] = useState(1);
 
   function handleMinus() {
