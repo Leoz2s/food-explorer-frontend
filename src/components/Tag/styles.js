@@ -12,10 +12,20 @@ export const Container = styled.span`
   img {
     width: .8rem;
     height: .8rem;
+
+    cursor: pointer;
   }
 
-  .isnew {
+  &.isNew {
     border: 1px dashed ${({theme}) => theme.LIGHT.LIGHT_500};
     border-radius: 8px;
+    background: none;
+    color: ${({theme}) => theme.LIGHT.LIGHT_500};
+
+    input {
+      border: none;
+      width: 6rem;
+      color: ${({theme}) => theme.LIGHT.LIGHT_100};
+    }
   }
 `;

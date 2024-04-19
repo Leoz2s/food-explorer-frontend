@@ -33,6 +33,7 @@ export function SignUp() {
         <div className="input-wrapper">
           <p>Seu nome</p>
           <Input 
+            type="text"
             placeholder="Exemplo: Maria da Silva" 
             onChange={e => setName(e.target.value)}
           />
@@ -51,6 +52,7 @@ export function SignUp() {
           <p>Senha</p>
           <Input 
             type="password"
+            minlength="6"
             placeholder="No mínimo 6 caracteres"
             onChange={e => setPassword(e.target.value)}
           />
