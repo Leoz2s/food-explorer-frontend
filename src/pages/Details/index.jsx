@@ -63,7 +63,7 @@ export function Details() {
           <div className="ingredients-group">
             { data.ingredients &&
               data.ingredients.map((ingredient, index) => (
-                <Tag key={index} text={ingredient} />
+                <Tag key={index} value={ingredient} />
               ))
             }
           </div>

@@ -22,6 +22,9 @@ export default createGlobalStyle`
   a, button {
     color: ${({theme}) => theme.LIGHT.LIGHT_100};
     text-decoration: none;
+    
+    background: none;
+    border: none;
     cursor: pointer;
   }
 `;
