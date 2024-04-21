@@ -27,6 +27,8 @@ export const InputElement = styled.input`
   
   padding: 1.2rem 1.4rem;
   height: 4.8rem;
+
+  width: 100%;
   
   font-family: Roboto, sans-serif;
   font-size: 1.6rem;

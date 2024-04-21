@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import { Container } from "./styles";
+import { Container, Form } from "./styles";
 import {Input} from "../../components/Input";
 import {Button} from "../../components/Button";
 import {ButtonText} from "../../components/ButtonText";
@@ -29,7 +29,9 @@ export function SignUp() {
     <Container >
       <h1><img src={logo} alt="food explorer logo" /> food explorer</h1>
 
-      <form>
+      <Form>
+        <h2 id="desktop-title">Crie sua conta</h2>
+
         <div className="input-wrapper">
           <p>Seu nome</p>
           <Input 
@@ -63,7 +65,7 @@ export function SignUp() {
           onClick={handleSignUp}
         />
         <ButtonText text="Já tenho uma conta" onClick={handleReturn} />
-      </form>
+      </Form>
     </Container>
   );
 };
