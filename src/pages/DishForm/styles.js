@@ -31,6 +31,19 @@ export const Main = styled.main`
     font-weight: 500;
     font-family: 3.2rem;
   }
+
+  @media (min-width: 1000px) {
+    a {
+      margin-top: 4rem;
+
+      font-weight: 700;
+      font-size: 2.4rem;
+    }
+    a img {
+      width: 2.8rem;
+      height: 2.6rem;
+    }
+  };
 `;
 
 export const Form = styled.form `
@@ -38,48 +51,13 @@ export const Form = styled.form `
   flex-direction: column;
   gap: 2.4rem;
 
-  > .input-wrap {
+  .input-wrap {
     display: grid;
 
     p {
       margin-bottom: 1.6rem;
 
       color: ${({theme}) => theme.LIGHT.LIGHT_400};
-    }
-  }
-
-  > .image-input input {
-    display: none;
-  }
-
-  > .name-input, .price-input {
-    input {
-      width: 100%;
-      background-color: ${({theme}) => theme.DARK.DARK_800};
-    }
-  }
-
-  > .ingredients-input .ingredients-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.6rem;
-
-    padding: .4rem .8rem;
-    background-color: ${({theme}) => theme.DARK.DARK_800};
-    border-radius: 8px;
-
-    div {
-      background-color: ${({theme}) => theme.LIGHT.LIGHT_600};
-    }
-    div span {
-      font-weight: 400;
-    }
-    div.isNew {
-      background: none;
-    }
-    div input {
-      width: 6.8rem;
-      max-width: 10rem;
     }
   }
   
@@ -90,6 +68,8 @@ export const Form = styled.form `
 
     button {
       justify-content: center;
+
+      width: 100%;
       background-color: ${({theme}) => theme.TINTS.TOMATO_400};
       border-radius: 5px;
       opacity: 0.8;
@@ -111,6 +91,111 @@ export const Form = styled.form `
 
     &:placeholder-shown {
       color: ${({theme}) => theme.LIGHT.LIGHT_500};
+    }
+  }
+
+  @media (min-width: 1000px) {
+    > #image-name-category,
+      #ingredients-price {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 3.2rem;
+    }
+
+    > #buttons-group {
+      justify-content: flex-end;
+
+      button {
+        width: auto;
+      }
+    }
+  }
+`;
+
+export const Image_Name_Category_Inputs = styled.div`
+  > .image-input input {
+    display: none;
+  }
+
+  > .name-input {
+    input {
+      width: 100%;
+      background-color: ${({theme}) => theme.DARK.DARK_800};
+    }
+  }
+
+  @media (min-width: 1000px) {
+    &#image-name-category {
+
+    }
+
+    > .image-input {
+      min-width: 22.9rem;
+    }
+    > .name-input {
+      min-width: 46.3rem;
+      width: 100%;
+    }
+    > .category-input {
+      min-width: 36.4rem;
+      width: 100%;
+    }
+  }
+`;
+
+export const Ingredients_Price_Inputs = styled.div`
+  > .ingredients-input .ingredients-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+
+    padding: .4rem .8rem;
+    background-color: ${({theme}) => theme.DARK.DARK_800};
+    border-radius: 8px;
+
+    div {
+      background-color: ${({theme}) => theme.LIGHT.LIGHT_600};
+      border-radius: 8px;
+    }
+    div span {
+      font-weight: 400;
+    }
+    div.isNew {
+      background: none;
+    }
+    div input {
+      width: 6.8rem;
+      max-width: 10rem;
+    }
+  }
+
+  > .price-input {
+    input {
+      background-color: ${({theme}) => theme.DARK.DARK_800};
+    }
+  }
+  
+  @media (min-width: 1000px) {
+    &#ingredients-price {
+      display: grid;
+      grid-template-areas: "Ingredients Price";
+      grid-template-columns: 1fr 25.1rem;
+      gap: 2.4rem;
+    }
+
+    > .ingredients-input .ingredients-group {
+      min-height: 4.8rem;
+
+      div {
+        padding: 1rem 1.6rem;
+      }
+    }
+
+    > .price-input {
+      min-width: 25.1rem;
+      width: 100%;
     }
   }
 `;
@@ -140,7 +225,7 @@ export const Select = styled.div`
   #select-button {
     background-color: ${({theme}) => theme.DARK.DARK_900};  
     padding: 1.6rem;
-    height: 5.4rem;
+    height: 4.8rem;
     border-radius: 8px;
 
     display: flex;

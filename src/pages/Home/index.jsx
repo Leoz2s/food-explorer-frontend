@@ -42,6 +42,27 @@ export function Home() {
         price: "R$ 49,97",
         role: `${role}`,
       },
+      {
+        id: 3,
+        image: `${dish_mask_2}`,
+        name: "Salada Ravanello",
+        price: "R$ 49,97",
+        role: `${role}`,
+      },
+      {
+        id: 3,
+        image: `${dish_mask_2}`,
+        name: "Salada Ravanello",
+        price: "R$ 49,97",
+        role: `${role}`,
+      },
+      {
+        id: 3,
+        image: `${dish_mask_2}`,
+        name: "Salada Ravanello",
+        price: "R$ 49,97",
+        role: `${role}`,
+      },
     ]);
     setFavorites(
       {

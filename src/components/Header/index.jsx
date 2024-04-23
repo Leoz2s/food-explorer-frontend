@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { Container } from "./styles";
+import { Container, Logo, ReceiptWrapper } from "./styles";
 import {Input} from "../Input";
 import {Button} from "../Button";
 
@@ -13,7 +13,7 @@ import SignOutIcon from "../../assets/icons/SignOut.svg";
 export function Header({...rest}) {
   const navigate = useNavigate();
 
-  const isAdmin = false
+  const isAdmin = true
 
   function redirectToMenu() {
     navigate("/menu");
@@ -29,23 +29,25 @@ export function Header({...rest}) {
         onClick={redirectToMenu}
       />
 
-      <h1 onClick={redirectToHome}>
-        <img src={logo} alt="food explorer logo" />
-        food explorer
-      </h1>
-      { isAdmin === true &&
-        <span>admin</span>
-      }
+      <Logo>
+        <h1 onClick={redirectToHome}>
+          <img src={logo} alt="food explorer logo" />
+          food explorer
+        </h1>
+        { isAdmin === true &&
+          <span>admin</span>
+        }
+      </Logo>
 
       { isAdmin === false &&
-        <div className="receipt-wrapper mobile">
+        <ReceiptWrapper className="mobile">
           <img src={ReceiptIcon} alt="Receipt icon" />
           <div className="itens-amount">0</div>
-        </div>
+        </ReceiptWrapper>
       }
 
       <Input className="desktop" Icon={Search} placeholder="Busque por pratos ou ingredientes" />
-      <Button className="desktop" Icon={ReceiptIcon} text={`Pedidos (0)`}  />
+      <Button className="desktop" Icon={isAdmin ? "" : ReceiptIcon} text={isAdmin ? "Novo prato" : `Pedidos (0)`}  />
       <img className="desktop" src={SignOutIcon} alt="Logout" />
     </Container>
   );

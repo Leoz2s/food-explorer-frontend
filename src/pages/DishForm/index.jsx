@@ -7,7 +7,7 @@ import DeleteIcon from "../../assets/icons/Close.svg";
 import ChevronDownIcon from "../../assets/icons/chevron-down.svg";
 import ChevronUpIcon from "../../assets/icons/chevron-up.svg";
 
-import {Container, Main, Form, Label, Select, Textarea} from "./styles";
+import {Container, Main, Form, Image_Name_Category_Inputs, Ingredients_Price_Inputs, Label, Select, Textarea} from "./styles";
 import {Header} from "../../components/Header";
 import {ButtonText} from "../../components/ButtonText";
 import {Input} from "../../components/Input";
@@ -32,7 +32,7 @@ export function DishForm() {
     navigate(-1);
   };
 
-  function handleAddIngredient() {
+  function handleAddIngredient(e) {
     setIngredients([...ingredients, newIngredient]);
   };
   function handleRemoveIngredient(ingredientToRemove) {
@@ -80,107 +80,111 @@ export function DishForm() {
         <h2>{editingDish ? "Editar prato" : "Novo prato"}</h2>
 
         <Form>
-          <div className="input-wrap image-input">
-            <p>Imagem do prato</p>
+          <Image_Name_Category_Inputs id="image-name-category">
+            <div className="input-wrap image-input">
+              <p>Imagem do prato</p>
 
-            <Label htmlFor="upload" ><img src={UploadIcon}/>{editingDish ? "Selecione imagem para alterá-la" : "Selecione imagem"}</Label>
-            <Input type="file" id="upload" />
-          </div>
+              <Label htmlFor="upload" ><img src={UploadIcon}/>{"Selecione imagem"}</Label>
+              <Input type="file" id="upload" />
+            </div>
 
-          <div className="input-wrap name-input">
-            <p>Nome</p>
-            <Input 
-              type="text" 
-              placeholder={editingDish ? data.name : "Ex.: Salada Ceasar"}
-              onChange={e => setName(e.target.value)}
-            />
-          </div>
-
-          <div className="input-wrap category-input">
-            <p>Categoria</p>
-
-            <Select>
-              <div id="category-select">
-                {/* <label htmlFor="options-view-button">Categoria</label> */}
-                <input type="checkbox" id="options-view-button" />
-
-                <div id="select-button">
-                  <div id="selected-value">{category}</div>
-
-                  <div id="chevrons">
-                    <img src={ChevronDownIcon}/>
-                    <img src={ChevronUpIcon}/>
-                  </div>
-                </div>
-              </div>
-
-              <ul id="options">
-                <li className="option">
-                  <input
-                    type="radio"
-                    name="category"
-                    value="meal"
-                    data-label="Refeição"
-                    onClick={e => setCategory(e.target.dataset.label)}
-                  />
-                  <span>Refeição</span>
-                </li>
-
-                <li className="option">
-                  <input
-                    type="radio"
-                    name="category"
-                    value="dessert"
-                    data-label="Sobremesa"
-                    onClick={e => setCategory(e.target.dataset.label)}
-                  />
-                  <span>Sobremesa</span>
-                </li>
-
-                <li className="option">
-                  <input
-                    type="radio"
-                    name="category"
-                    value="drink"
-                    data-label="Bebida"
-                    onClick={e => setCategory(e.target.dataset.label)}
-                  />
-                  <span>Bebida</span>
-                </li>
-              </ul>
-            </Select>
-          </div>
-
-          <div className="input-wrap ingredients-input">
-            <p>Ingredientes</p>
-            <div className="ingredients-group">
-              { ingredients &&
-                ingredients.map((ingredient, index) => (
-                  <Tag 
-                    key={index}
-                    value={ingredient} 
-                    Icon={DeleteIcon} IconAlt="Remover o ingrediente"
-                    onClick={e => handleRemoveIngredient(e.target.value)}
-                  />
-                ))
-              }
-              <Tag 
-                isNew 
-                placeholder="Adicionar"
-                onClick={handleAddIngredient}
-                onChange={e => setNewIngredient(e.target.value)}
+            <div className="input-wrap name-input">
+              <p>Nome</p>
+              <Input 
+                type="text" 
+                placeholder={editingDish ? data.name : "Ex.: Salada Ceasar"}
+                onChange={e => setName(e.target.value)}
               />
             </div>
-          </div>
-            
-          <div className="input-wrap price-input">
-            <p>Preço</p>
-            <Input 
-              type="number"
-              placeholder={editingDish ? data.price : "R$ 00,00"}
-              onChange={e => setPrice(e.target.value)}
-            />
-          </div>
+
+            <div className="input-wrap category-input">
+              <p>Categoria</p>
+
+              <Select>
+                <div id="category-select">
+                  {/* <label htmlFor="options-view-button">Categoria</label> */}
+                  <input type="checkbox" id="options-view-button" />
+
+                  <div id="select-button">
+                    <div id="selected-value">{category}</div>
+
+                    <div id="chevrons">
+                      <img src={ChevronDownIcon}/>
+                      <img src={ChevronUpIcon}/>
+                    </div>
+                  </div>
+                </div>
+
+                <ul id="options">
+                  <li className="option">
+                    <input
+                      type="radio"
+                      name="category"
+                      value="meal"
+                      data-label="Refeição"
+                      onClick={e => setCategory(e.target.dataset.label)}
+                    />
+                    <span>Refeição</span>
+                  </li>
+
+                  <li className="option">
+                    <input
+                      type="radio"
+                      name="category"
+                      value="dessert"
+                      data-label="Sobremesa"
+                      onClick={e => setCategory(e.target.dataset.label)}
+                    />
+                    <span>Sobremesa</span>
+                  </li>
+
+                  <li className="option">
+                    <input
+                      type="radio"
+                      name="category"
+                      value="drink"
+                      data-label="Bebida"
+                      onClick={e => setCategory(e.target.dataset.label)}
+                    />
+                    <span>Bebida</span>
+                  </li>
+                </ul>
+              </Select>
+            </div>
+          </Image_Name_Category_Inputs>
+
+          <Ingredients_Price_Inputs id="ingredients-price">
+            <div className="input-wrap ingredients-input">
+              <p>Ingredientes</p>
+              <div className="ingredients-group">
+                { ingredients &&
+                  ingredients.map((ingredient, index) => (
+                    <Tag 
+                      key={index}
+                      value={ingredient} 
+                      Icon={DeleteIcon} IconAlt="Remover o ingrediente"
+                      onClick={e => handleRemoveIngredient(e.target.value)}
+                    />
+                  ))
+                }
+                <Tag 
+                  isNew 
+                  placeholder="Adicionar"
+                  onClick={e => handleAddIngredient(e)}
+                  onChange={e => setNewIngredient(e.target.value)}
+                />
+              </div>
+            </div>
+              
+            <div className="input-wrap price-input">
+              <p>Preço</p>
+              <Input 
+                type="number"
+                placeholder={editingDish ? data.price : "R$ 00,00"}
+                onChange={e => setPrice(e.target.value)}
+              />
+            </div>
+          </Ingredients_Price_Inputs>
 
           <div className="input-wrap description-input">
             <p>Descrição</p>

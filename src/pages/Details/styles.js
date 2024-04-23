@@ -102,17 +102,14 @@ export const DishInfosAndActions = styled.div`
 
       h2 {
         font-family: Poppins;
-        font-size: 40px;
-        font-style: normal;
         font-weight: 500;
+        font-size: 4rem;
         line-height: 140%; /* 56px */
       }
-  
       p {
         font-family: Poppins;
-        font-size: 24px;
-        font-style: normal;
         font-weight: 400;
+        font-size: 2.4rem;
         line-height: 140%; /* 33.6px */
 
         text-align: start;

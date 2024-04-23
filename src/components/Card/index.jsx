@@ -49,18 +49,19 @@ export function Card({data, favorites, ...rest}) {
           onClick={redirectToEditDish}
         />
         ||
-        favorited === false && <img 
-          src={favoriteIcon} alt="ícone de prato não favoritado" 
+        favorited === false && 
+        <img src={favoriteIcon} alt="ícone de prato não favoritado" 
           className="action-icon"
           onClick={addToFavorites}
         />
         ||
-        favorited === true && <img 
-          src={filledFavoriteIcon} alt="ícone de prato favoritado" 
+        favorited === true && 
+        <img src={filledFavoriteIcon} alt="ícone de prato favoritado" 
           className="action-icon"
           onClick={removeFromFavorites}
         />
       }
+
       <img src={data.image} alt="Foto do prato." className="dish-image" />
       
       <Link to={`/details/${data.id}`}>

@@ -125,12 +125,24 @@ export const Main = styled.main`
 
   padding-left: 2.4rem;
 
-  .dishes-group {
+  > .dishes-group {
     margin-block: 2.4rem;
 
     display: flex;
     gap: 1.6rem;
 
     overflow-x: scroll;
+  }
+
+  @media (min-width: 1000px) {
+    > .dishes-group {
+      > div {
+        width: 25.6rem;
+        height: 41.1rem;
+
+        padding: 2.4rem;
+        border-radius: 8px;
+      }
+    }
   }
 `;
