@@ -13,7 +13,7 @@ export const Container = styled.button`
   color: ${({theme}) => theme.LIGHT.LIGHT_100};
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: .5rem;
 `;

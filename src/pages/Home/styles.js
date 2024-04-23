@@ -13,47 +13,110 @@ export const Container = styled.div`
 `;
 
 export const Message = styled.div`
-    margin-block: 4.4rem 6.2rem;
+  margin-block: 4.4rem 6.2rem;
 
-    background-image: ${({theme}) => theme.GRADIENTS.GRADIENT_200};
-    width: 34.6rem;
-    height: 12rem;
-    
-    display: flex;
-    justify-content: center;
-    margin-inline: auto;
+  background-image: ${({theme}) => theme.GRADIENTS.GRADIENT_200};
+  width: 34.6rem;
+  height: 12rem;
+  
+  display: flex;
+  justify-content: flex-end;
+  margin-inline: auto;
 
-    position: relative;
-    
+  position: relative;
+  
+  > img {
+    width: 19.1rem;
+    height: 14.9rem;
+
+    position: absolute;
+    top: -3rem;
+    left: -3.4rem;
+  }
+
+  > #message-content {
+    margin-top: 3.6rem;
+    margin-left: 14.1rem;
+
+    font-family: Poppins, sans-serif;
+    color: ${({theme}) => theme.LIGHT.LIGHT_300};
+    line-height: 130%;
+
+    width: 29.5rem;
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  @media (min-width: 800px) {
+    margin-top: 11.4rem;
+
+    width: calc(70rem + 10vw);
+    max-width: 112rem;
+    height: calc(12.5rem + 8vw);
+    max-height: 26rem;
+
+    border-radius: 8px;
+
+    > .mobile {
+      display: none;
+    }
+    > .desktop {
+      display: block;
+    }
+
     > img {
-      width: 191px;
-      height: 149px;
+      width: calc(30rem + 10vw);
+      max-width: 63.2rem;
+      height: calc(20rem + 8vw);
+      max-height: 40.6rem;
 
-      position: absolute;
-      top: -3rem;
-      left: -3.4rem;
+      top: calc(-7.5rem - 0.1vw);
     }
 
     > #message-content {
-      margin-left: 14.1rem;
+      margin-top: 0;
+      margin-right: 4.1rem;
 
-      font-family: Poppins, sans-serif;
-      color: ${({theme}) => theme.LIGHT.LIGHT_300};
-      line-height: 130%;
+      align-self: center;
 
-      width: 29.5rem;
+      width: 42.2rem;
 
       h2 {
-        margin-top: 3.6rem;
-
-        font-size: 1.8rem;
-        font-weight: 600;
+        font-size: 4rem;
+        font-weight: 500;
+        line-height: 140%; /* 56px */
       }
-
       p {
-        font-size: 1.2rem;
+        font-family: Roboto;
+        font-size: 1.6rem;
       }
     }
+  }
+
+  @media (min-width: 1300px) {
+    margin-top: 16.4rem;
+
+    width: 112rem;
+    height: 26rem;
+
+    > img {
+      width: 61.2rem;
+      height: 40.6rem;
+
+      top: -14.5rem;
+    }
+  }
 `;
 
 export const Main = styled.main`

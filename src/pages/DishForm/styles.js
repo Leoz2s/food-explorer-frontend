@@ -1,5 +1,3 @@
-import SelectArrowIcon from "../../assets/icons/chevron-down.svg";
-
 import {styled} from 'styled-components';
 
 export const Container = styled.div`
@@ -73,25 +71,40 @@ export const Form = styled.form `
     div {
       background-color: ${({theme}) => theme.LIGHT.LIGHT_600};
     }
+    div span {
+      font-weight: 400;
+    }
     div.isNew {
       background: none;
-      width: fit-content;
     }
-
     div input {
-      width: fit-content;
+      width: 6.8rem;
+      max-width: 10rem;
     }
   }
   
-  > button {
+  > #buttons-group {
+    display: flex;
     justify-content: center;
-    background-color: ${({theme}) => theme.TINTS.TOMATO_400};
-    border-radius: 5px;
-    opacity: 0.8;
+    gap: 3.2rem;
+
+    button {
+      justify-content: center;
+      background-color: ${({theme}) => theme.TINTS.TOMATO_400};
+      border-radius: 5px;
+      opacity: 0.8;
+
+      padding-inline: 2.4rem;
+    }
+    button:hover {
+      opacity: 1;
+    }
+
+    button#delete-button {
+      background-color: ${({theme}) => theme.DARK.DARK_800};
+    }
   }
-  > button:hover {
-    opacity: 1;
-  }
+  
 
   > label, select, textarea {
     border: none;    

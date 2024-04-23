@@ -25,6 +25,15 @@ export const Main = styled.main`
     color: ${({theme}) => theme.LIGHT.LIGHT_300};
   }
 
+  @media (min-width: 1000px) {
+    max-width: fit-content;
+  }
+`;
+
+export const Dish = styled.div`
+  display: flex;
+  flex-direction: column;
+
   > img {
     align-self: center;
 
@@ -34,6 +43,13 @@ export const Main = styled.main`
     height: 26.4rem;
   }
 
+  @media (min-width: 1000px) {
+    flex-direction: row;
+    gap: 4.7rem;
+  }
+`;
+
+export const DishInfosAndActions = styled.div`
   > .dish-info {
     display: grid;
     justify-items: center;
@@ -74,6 +90,33 @@ export const Main = styled.main`
       max-width: 31.6rem;
       
       justify-content: center;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    display: grid;
+    justify-items: flex-start;
+
+    > .dish-info {
+      justify-items: flex-start;
+
+      h2 {
+        font-family: Poppins;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 140%; /* 56px */
+      }
+  
+      p {
+        font-family: Poppins;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%; /* 33.6px */
+
+        text-align: start;
+      }
     }
   }
 `;

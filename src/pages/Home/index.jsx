@@ -7,6 +7,7 @@ import {Card} from "../../components/Card";
 import {Footer} from "../../components/Footer";
 
 import message_image from "../../assets/images/message-image.png";
+import desktop_message_image from "../../assets/images/desktop-message-image.png";
 import dish_mask from "../../assets/images/dishes-and-drinks-mask-group/0-Dish.png"
 import dish_mask_1 from "../../assets/images/dishes-and-drinks-mask-group/1-Dish.png"
 import dish_mask_2 from "../../assets/images/dishes-and-drinks-mask-group/2-Dish.png"
@@ -16,7 +17,7 @@ export function Home() {
   const [dishes, setDishes] = useState([]);
   const [favorites, setFavorites] = useState({});
 
-  const role = "admin";
+  const role = "user";
 
   useEffect(() => {
     setDishes(
@@ -58,7 +59,8 @@ export function Home() {
 
       <Main>
         <Message>
-          <img src={message_image} alt="Food image" />
+          <img className="mobile" src={message_image} alt="Food image" />
+          <img className="desktop" src={desktop_message_image} alt="Food image" />
           <div id="message-content">
             <h2>Sabores inigualáveis</h2>
             <p>Sinta o cuidado do preparo com ingredientes selecionados.</p>

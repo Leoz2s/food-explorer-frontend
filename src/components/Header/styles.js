@@ -48,4 +48,33 @@ export const Container = styled.header`
       text-align: center;
     }
   }
+
+  .desktop, div.desktop img {
+    display: none;
+  }
+
+  @media (min-width: 1000px) {
+    gap: 3.2rem;
+
+    .mobile {
+      display: none;
+    }
+    .desktop{
+      display: block;
+    }
+
+    > div input {
+      min-width: 30rem;
+      width: calc(28rem + 4vw);
+      max-width: 58.1rem;
+    }
+
+    > button.desktop {
+      display: flex;
+      gap: .8rem;
+
+      width: 21.6rem;
+      border-radius: 5px;
+    }
+  }
 `;

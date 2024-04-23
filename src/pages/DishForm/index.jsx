@@ -190,8 +190,13 @@ export function DishForm() {
               onChange={e => setDescription(e.target.value)}
             />
           </div>
-
-          <Button text="Salvar alterações" />
+          
+          <div id="buttons-group">
+            { editingDish === true &&
+              <Button id="delete-button" text="Excluir prato" />
+            }
+            <Button text="Salvar alterações" />
+          </div>
         </Form>
       </Main>
 

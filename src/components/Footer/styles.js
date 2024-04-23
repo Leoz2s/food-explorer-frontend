@@ -32,4 +32,9 @@ export const Container = styled.footer`
     color: ${({theme}) => theme.LIGHT.LIGHT_200};
     text-align: right;
   }
+
+  @media (min-width: 1000px) {
+    padding-inline: 12.3rem;
+    justify-content: space-between;
+  }
 `;

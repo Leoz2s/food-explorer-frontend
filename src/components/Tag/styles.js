@@ -6,6 +6,7 @@ export const Container = styled.div`
   border-radius: 5px;
 
   display: flex;
+  align-items: center;
   gap: .8rem;
   
   > input, span {
@@ -14,7 +15,7 @@ export const Container = styled.div`
 
     width: fit-content;
 
-    font-weight: 400;
+    font-weight: 500;
     font-size: 1.4rem;
     color: ${({theme}) => theme.LIGHT.LIGHT_100};
 
