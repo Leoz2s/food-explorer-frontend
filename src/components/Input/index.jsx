@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { Container, InputElement } from "./styles";
 
-export function Input({Icon, ...rest}) {
+import SearchIcon from "../../assets/icons/Search.svg";
+
+export function Input({Icon, isSearch, ...rest}) {
   const [inputValue, setInputValue] = useState("");
 
   return(
     <Container >
-      { Icon && <img 
-          src={Icon} 
+      { Icon && 
+        <img src={Icon} 
           className={inputValue === "" ? "" : "hide-icon"}
         />
+        ||
+        isSearch &&
+        <img src={SearchIcon} />
       }
+      
       <InputElement 
         onChange={e => setInputValue(e.target.value)} 
         {...rest}

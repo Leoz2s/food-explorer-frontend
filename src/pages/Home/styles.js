@@ -131,10 +131,18 @@ export const Main = styled.main`
     display: flex;
     gap: 1.6rem;
 
-    overflow-x: scroll;
+    overflow-x: hidden;
+
+    section {
+      max-width: 100vw;
+
+      .splide__arrows {
+        display: none;
+      }
+    }
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: 800px) {
     > .dishes-group {
       > div {
         width: 25.6rem;
@@ -142,6 +150,25 @@ export const Main = styled.main`
 
         padding: 2.4rem;
         border-radius: 8px;
+      }
+
+      section {
+        .splide__arrows {
+          display: grid;
+        }
+        .splide__arrow {
+          height: 8.2rem;
+          /* width: 4rem; */
+          /* background-image: ${({theme}) => theme.GRADIENTS.GRADIENT_100}; */
+        }
+        .splide__arrow--prev {          
+          justify-content: left;
+          /* width: 18rem; */
+        }
+        .splide__arrow--next {
+          justify-content: left;
+          /* width: 18rem; */
+        }
       }
     }
   }

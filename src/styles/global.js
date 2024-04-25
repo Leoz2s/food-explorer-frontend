@@ -27,4 +27,8 @@ export default createGlobalStyle`
     border: none;
     cursor: pointer;
   }
+
+  button:hover {
+    opacity: 0.75;
+  }
 `;

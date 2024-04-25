@@ -6,14 +6,13 @@ import {Button} from "../Button";
 
 import MenuIcon from "../../assets/icons/Menu.svg";
 import logo from "../../assets/icons/Polygon.svg";
-import Search from "../../assets/icons/Search.svg";
 import ReceiptIcon from "../../assets/icons/Receipt.svg";
 import SignOutIcon from "../../assets/icons/SignOut.svg";
 
 export function Header({...rest}) {
   const navigate = useNavigate();
 
-  const isAdmin = true
+  const isAdmin = false
 
   function redirectToMenu() {
     navigate("/menu");
@@ -41,12 +40,12 @@ export function Header({...rest}) {
 
       { isAdmin === false &&
         <ReceiptWrapper className="mobile">
-          <img src={ReceiptIcon} alt="Receipt icon" />
           <div className="itens-amount">0</div>
+          <img src={ReceiptIcon} alt="Receipt icon" />
         </ReceiptWrapper>
       }
 
-      <Input className="desktop" Icon={Search} placeholder="Busque por pratos ou ingredientes" />
+      <Input className="desktop" isSearch placeholder="Busque por pratos ou ingredientes" />
       <Button className="desktop" Icon={isAdmin ? "" : ReceiptIcon} text={isAdmin ? "Novo prato" : `Pedidos (0)`}  />
       <img className="desktop" src={SignOutIcon} alt="Logout" />
     </Container>

@@ -9,7 +9,8 @@ export const Container = styled.header`
   justify-content: center;
   gap: 2.6rem;
 
-  .desktop, div.desktop img {
+  .desktop,
+  > div > img:nth-child(1) {
     display: none;
   }
 
@@ -19,7 +20,8 @@ export const Container = styled.header`
     .mobile {
       display: none;
     }
-    .desktop{
+    .desktop,
+    > div > img:nth-child(1) {
       display: block;
     }
 
