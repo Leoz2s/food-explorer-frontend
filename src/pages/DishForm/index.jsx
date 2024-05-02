@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { api } from "../../services/api";
 
 import CaretLeftIcon from "../../assets/icons/CaretLeft.svg";
 import UploadIcon from "../../assets/icons/UploadSimple.svg";
@@ -16,56 +17,131 @@ import {Button} from "../../components/Button";
 import {Footer} from "../../components/Footer";
 
 export function DishForm() {
+  const params = useParams();
   const navigate = useNavigate();
+
   const [data, setData] = useState("");
+  const [editingDish, setEditingDish] = useState(false);
+
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Selecione a categoria");
   const [ingredients, setIngredients] = useState([]);
-  const [newIngredient, setNewIngredient] = useState("Adicionar");
+  const [newIngredient, setNewIngredient] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   
-  const editingDish = true
-
   function handleReturn() {
     navigate(-1);
   };
 
-  function handleAddIngredient(e) {
-    setIngredients([...ingredients, newIngredient]);
+  function handleAddIngredient() {
+    setIngredients(prevState => [...prevState, newIngredient]);
+    setNewIngredient("");
   };
   function handleRemoveIngredient(ingredientToRemove) {
-    const filteredIngredients = ingredients.filter(ingredient => ingredient !== ingredientToRemove);
-    setIngredients(filteredIngredients);
+    setIngredients(prevState => prevState.filter(ingredient => ingredient !== ingredientToRemove));
+  };
+
+  async function handleCreateDish(e) {
+    e.preventDefault();
+    
+    if(!name || category === "Selecione a categoria" || !ingredients || !price || !description ) {
+      return alert("Preencher todos os campos é necessário para criar um novo prato.");
+    }else if(newIngredient) {
+      return alert("Um novo ingrediente foi deixado no campo de novos ingredientes. Adicione o novo ingrediente ou esvazie o campo.");
+    };
+    
+    await api.post("/dishes", {name, category, ingredients, price, description});
+    
+    alert("Prato criado com sucesso!");
+    navigate("/");
+  };
+  
+  function handleDeleteDish() {
+    const confrim = window.confirm("Você quer mesmo deletar este consumível?");
+    if(confrim) {
+      api.delete(`/dishes/${params.id}`);
+      navigate("/");
+    };
+  };
+
+  async function handleUpdateDish(e) {
+    e.preventDefault();
+    try {
+      if(newIngredient) {
+        return alert("Um novo ingrediente foi deixado no campo de novos ingredientes. Adicione o novo ingrediente ou esvazie o campo.");
+      };
+
+      const dish = {
+        name: name == "" ? data.name : name,
+        category,
+        ingredients,
+        price: price == 0 ? data.price : price,
+        description: description == "" ? data.description : description
+      };
+
+      await api.put(`/dishes/${params.id}`, dish);
+      
+      if(image) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("image", image);
+        
+        console.log(fileUploadForm)
+        await api.patch(`/dishes/${params.id}/image`, fileUploadForm);
+      };
+      
+      alert("Os dados foram atualizados.");
+      navigate("/");
+
+    }catch(error) {
+      if(error.response) {
+        console.log(error.response)
+        alert(error.response.data.message);
+      }else {
+        alert("A atualização dos dados não foi possível.");
+      };
+    };
+  };
+
+  function handleNewImage(event) {
+    const file = event.target.files[0];
+    setImage(file);
+  };
+  
+  function formatPrice(value) {
+    if(value > 0) {
+      let formatedPrice = String("R$ " + value).replace('.', ',');
+      if(formatedPrice.includes(',')){
+        setPrice(formatedPrice);
+      }else {
+        setPrice(formatedPrice += ",00");
+      };
+    };
   };
 
   useEffect(() => {
-    setIngredients(["alface", "cebola", "pão naan", "pepino", "rabanete", "tomate",]);
+    async function createOrEditDish() {
+      if(params.id) {
+        const response = await api.get(`/dishes/${params.id}`);
+        setData(response.data);
+        setEditingDish(true);
 
-    async function editOrCreateDish() {
-      await setData(
-        {
-          id: 1,
-          name: "Salada Ravanello",
-          category: "meal",
-          description: "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.",
-          ingredients: [
-            "alface", "cebola", "pão naan", "pepino", "rabanete", "tomate",
-          ],
-          price: "R$ 25,00",
-        }
-      );
+        if(response.data.category == "Refeição") {
+          setCategory("Refeição");
+        } else if(response.data.category == "Sobremesa") {
+          setCategory("Sobremesa");
+        } else if(response.data.category == "Bebida") {
+          setCategory("Bebida");
+        };
 
-      if(editingDish && data.category == "meal") {
-        setCategory("Refeição");
-      } else if(editingDish && data.category == "dessert") {
-        setCategory("Sobremesa");
-      } else if(editingDish && data.category == "drink") {
-        setCategory("Bebida");
+        setIngredients(response.data.ingredients);  
+      }else {
+        setEditingDish(false);
       };
     };
-    editOrCreateDish();
+    createOrEditDish();
+
   }, []);
 
   return(
@@ -85,7 +161,7 @@ export function DishForm() {
               <p>Imagem do prato</p>
 
               <Label htmlFor="upload" ><img src={UploadIcon}/>{"Selecione imagem"}</Label>
-              <Input type="file" id="upload" />
+              <Input type="file" id="upload" onChange={handleNewImage} />
             </div>
 
             <div className="input-wrap name-input">
@@ -160,18 +236,19 @@ export function DishForm() {
                 { ingredients &&
                   ingredients.map((ingredient, index) => (
                     <Tag 
-                      key={index}
-                      value={ingredient} 
+                      key={String(index)}
                       Icon={DeleteIcon} IconAlt="Remover o ingrediente"
-                      onClick={e => handleRemoveIngredient(e.target.value)}
+                      value={ingredient.name || ingredient} 
+                      onClick={() => handleRemoveIngredient(ingredient)}
                     />
                   ))
                 }
                 <Tag 
                   isNew 
                   placeholder="Adicionar"
-                  onClick={e => handleAddIngredient(e)}
+                  value={newIngredient}
                   onChange={e => setNewIngredient(e.target.value)}
+                  onClick={handleAddIngredient}
                 />
               </div>
             </div>
@@ -181,7 +258,7 @@ export function DishForm() {
               <Input 
                 type="number"
                 placeholder={editingDish ? data.price : "R$ 00,00"}
-                onChange={e => setPrice(e.target.value)}
+                onChange={e => formatPrice(e.target.value)}
               />
             </div>
           </Ingredients_Price_Inputs>
@@ -197,9 +274,9 @@ export function DishForm() {
           
           <div id="buttons-group">
             { editingDish === true &&
-              <Button id="delete-button" text="Excluir prato" />
+              <Button id="delete-button" text="Excluir prato" onClick={handleDeleteDish} />
             }
-            <Button text="Salvar alterações" />
+            <Button text="Salvar alterações" onClick={editingDish ? e => handleUpdateDish(e) : e => handleCreateDish(e)} />
           </div>
         </Form>
       </Main>

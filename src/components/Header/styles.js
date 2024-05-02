@@ -9,6 +9,10 @@ export const Container = styled.header`
   justify-content: center;
   gap: 2.6rem;
 
+  > img {
+    cursor: pointer;
+  }
+
   .desktop,
   > div > img:nth-child(1) {
     display: none;

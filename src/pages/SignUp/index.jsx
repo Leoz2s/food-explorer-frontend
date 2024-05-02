@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {api} from "../../services/api";
 
 import { Container, Form } from "./styles";
 import {Input} from "../../components/Input";
@@ -14,11 +15,28 @@ export function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSignUp() {
+  function handleSignUp(e) {
+    e.preventDefault();
     if(!name || !email || !password) {
-      alert("Você precisa preencher os campos de nome, email e senha para cadastrar sua conta.");
+      return alert("Você precisa preencher todos  os campos!");
+    }else if(password.length < 6) {
+      return alert("A senha precisa ter no mínimo 6 caracteres!")
     };
-    return
+    const role = "customer";
+
+    api.post("/users", {name, email, password, role})
+      .then(() => {
+        alert("Usuário criado com sucesso!");
+        navigate("/");
+        console.log("hi")
+      })
+      .catch(error => {
+        if(error.response) {
+          alert(error.response.data.message);
+        }else {
+          alert("O cadastro de usuário não foi possível.");
+        };
+      });
   };
 
   function handleReturn() {
@@ -54,7 +72,7 @@ export function SignUp() {
           <p>Senha</p>
           <Input 
             type="password"
-            minlength="6"
+            minLength="6"
             placeholder="No mínimo 6 caracteres"
             onChange={e => setPassword(e.target.value)}
           />
@@ -62,7 +80,7 @@ export function SignUp() {
 
         <Button 
           text="Criar conta"
-          onClick={handleSignUp}
+          onClick={e => handleSignUp(e)}
         />
         <ButtonText text="Já tenho uma conta" onClick={handleReturn} />
       </Form>

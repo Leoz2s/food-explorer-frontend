@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/splide/css/skyblue';
 
@@ -16,14 +17,17 @@ import desktop_message_image from "../../assets/images/desktop-message-image.png
 import dish_mask from "../../assets/images/dishes-and-drinks-mask-group/0-Dish.png"
 import dish_mask_1 from "../../assets/images/dishes-and-drinks-mask-group/1-Dish.png"
 import dish_mask_2 from "../../assets/images/dishes-and-drinks-mask-group/2-Dish.png"
+import { useAuth } from "../../hooks/auth";
 
 export function Home() {
   const navigate = useNavigate();
+  const {user} = useAuth();
+
   const [dishes, setDishes] = useState([]);
   const [favorites, setFavorites] = useState({});
   const [sliderSize, setSliderSize] = useState(2);
 
-  const role = "user";
+  const role = user.role;
 
   const SplideConfig = {
     perPage: sliderSize,
@@ -38,56 +42,14 @@ export function Home() {
   };
 
   useEffect(() => {
-    setDishes(
-      [{
-        id: 1,
-        image: `${dish_mask}`,
-        name: "Salada Ravanello",
-        price: "R$ 49,97",
-        role: `${role}`,
-      },
-      {
-        id: 2,
-        image: `${dish_mask_1}`,
-        name: "Spaguetti Gambe",
-        price: "R$ 79,97",
-        role: `${role}`,
-      },
-      {
-        id: 3,
-        image: `${dish_mask_2}`,
-        name: "Salada Ravanello",
-        price: "R$ 49,97",
-        role: `${role}`,
-      },
-      {
-        id: 3,
-        image: `${dish_mask_2}`,
-        name: "Salada Ravanello",
-        price: "R$ 49,97",
-        role: `${role}`,
-      },
-      {
-        id: 3,
-        image: `${dish_mask_2}`,
-        name: "Salada Ravanello",
-        price: "R$ 49,97",
-        role: `${role}`,
-      },
-      {
-        id: 3,
-        image: `${dish_mask_2}`,
-        name: "Salada Ravanello",
-        price: "R$ 49,97",
-        role: `${role}`,
-      },
-    ]);
+    async function fetchDishes() {
+      const response = await api.get(`/dishes?name=&ingredients=`);
+      setDishes(response.data);
+    };
+    fetchDishes();
+
     setFavorites(
-      {
-        id: 1,
-        name: "Salada Ravanello",
-        price: "R$ 49,97",
-      },
+      {id: 6,},
     );
 
     function handleResize() {
@@ -125,9 +87,11 @@ export function Home() {
           <Splide tag="section" hasTrack={false} aria-label="Meals" options={SplideConfig}>
             <SplideTrack>
               {
-                dishes.map(dish => (
-                  <SplideSlide>
-                    <Card key={dish.id} data={dish} favorites={favorites} />
+                dishes.map((dish, index) => (
+                  <SplideSlide key={index}>
+                    { dish.category == "Refeição" &&
+                      <Card key={dish.id} data={dish} favorites={favorites} />
+                    }
                   </SplideSlide>
                 ))
               }
@@ -149,9 +113,11 @@ export function Home() {
           <Splide tag="section" hasTrack={false} aria-label="Desserts" options={SplideConfig}>
             <SplideTrack>
             {
-              dishes.map(dish => (
-                <SplideSlide>
-                  <Card key={dish.id} data={dish} favorites={favorites} />
+              dishes.map((dish, index) => (
+                <SplideSlide key={index}>
+                    { dish.category == "Sobremesa" &&
+                      <Card key={dish.id} data={dish} favorites={favorites} />
+                    }
                 </SplideSlide>
               ))
             }
@@ -173,9 +139,11 @@ export function Home() {
           <Splide tag="section" hasTrack={false} aria-label="Drinks" options={SplideConfig}>
             <SplideTrack>
             {
-              dishes.map(dish => (
-                <SplideSlide>
-                  <Card key={dish.id} data={dish} favorites={favorites} />
+              dishes.map((dish, index) => (
+                <SplideSlide key={index}>
+                  { dish.category == "Bebida" &&
+                    <Card key={dish.id} data={dish} favorites={favorites} />
+                  }
                 </SplideSlide>
               ))
             }

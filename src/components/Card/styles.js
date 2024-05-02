@@ -31,7 +31,9 @@ export const Container = styled.div`
     width: var(--image-size);
   }
 
-  > p, a p {
+  > p {
+    cursor: pointer;
+
     font-family: Poppins;
     font-size: 1.4rem;
     font-weight: 500;
