@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
+import { api } from "../../services/api";
 
 import { Container } from "./styles";
 import {Button} from "../Button";
@@ -14,6 +16,8 @@ export function Card({data, favorites, ...rest}) {
   const navigate = useNavigate();
   const [amountValue, setAmountValue] = useState(0);
   const [favorited, setFavorited] = useState(false);
+  const [image, setImage] = useState("");
+  const {user} = useAuth();
 
   function addToFavorites() {
     favorites.id = data.id;
@@ -24,9 +28,12 @@ export function Card({data, favorites, ...rest}) {
     setFavorited(false);
   };
 
+  function redirectToDishDetails() {
+    navigate(`/details/${data.id}`);
+  };
   function redirectToEditDish() {
     navigate(`/edit-dish/${data.id}`);
-  };
+  };  
 
   function addDish() {
     console.log(`${amountValue} pratos de ${data.name} foram adicionados!`)
@@ -38,12 +45,19 @@ export function Card({data, favorites, ...rest}) {
     } else {
       setFavorited(false);
     }
+
+    async function fetchImage() {
+      const response = await api.get(`/files/${data.image}`);
+      setImage(`http://localhost:3333/files/${data.image}`);
+    };
+    fetchImage();
+
   }, [favorited]);
 
   return(
     <Container {...rest} >
       { 
-        data.role === "admin" &&  
+        user.role === "admin" &&  
         <img src={editIcon} alt="ícone de edição" 
           className="action-icon"
           onClick={redirectToEditDish}
@@ -62,17 +76,18 @@ export function Card({data, favorites, ...rest}) {
         />
       }
 
-      <img src={data.image} alt="Foto do prato." className="dish-image" />
+      <img src={image} alt="Foto do consumível" className="dish-image" />
       
-      <Link to={`/details/${data.id}`}>
-        <p>{data.name} <img src={caretRightIcon} /></p>
-      </Link>
+      <p onClick={redirectToDishDetails}>
+        {data.name} <img src={caretRightIcon} />
+      </p>
+
       <span>{data.price}</span>
 
-      { data.role !== "admin" &&
+      { user.role !== "admin" &&
         <NumericStepper amountvalue={setAmountValue} />
       }
-      { data.role !== "admin" &&
+      { user.role !== "admin" &&
         <Button text="Incluir" onClick={addDish} />
       }
     </Container>

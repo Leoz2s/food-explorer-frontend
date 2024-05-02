@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 
 import { Container, Logo, ReceiptWrapper } from "./styles";
 import {Input} from "../Input";
@@ -11,25 +12,34 @@ import SignOutIcon from "../../assets/icons/SignOut.svg";
 
 export function Header({...rest}) {
   const navigate = useNavigate();
+  const {user, signOut} = useAuth();
 
-  const isAdmin = false
+  const isAdmin = (user.role === "admin");
 
-  function redirectToMenu() {
+  function handleRedirectToMenu() {
     navigate("/menu");
   };
-  function redirectToHome() {
+  function handleRedirectToHome() {
     navigate("/");
+  };
+  function handleRedirectToNewDish() {
+    navigate("/new-dish");
+  };
+
+  function handleSignOut() {
+    navigate("/");
+    signOut();
   };
 
   return(
     <Container {...rest} >
       <img src={MenuIcon} alt="Menu icon" 
         className="mobile"
-        onClick={redirectToMenu}
+        onClick={handleRedirectToMenu}
       />
 
       <Logo>
-        <h1 onClick={redirectToHome}>
+        <h1 onClick={handleRedirectToHome}>
           <img src={logo} alt="food explorer logo" />
           food explorer
         </h1>
@@ -46,8 +56,15 @@ export function Header({...rest}) {
       }
 
       <Input className="desktop" isSearch placeholder="Busque por pratos ou ingredientes" />
-      <Button className="desktop" Icon={isAdmin ? "" : ReceiptIcon} text={isAdmin ? "Novo prato" : `Pedidos (0)`}  />
-      <img className="desktop" src={SignOutIcon} alt="Logout" />
+      <Button className="desktop" 
+        Icon={isAdmin ? "" : ReceiptIcon} 
+        text={isAdmin ? "Novo prato" : `Pedidos (0)`}  
+        onClick={isAdmin ? handleRedirectToNewDish : () => {}}  
+      />
+      <img className="desktop" 
+        src={SignOutIcon} alt="Logout" 
+        onClick={handleSignOut} 
+      />
     </Container>
   );
 };

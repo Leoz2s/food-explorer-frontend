@@ -7,18 +7,25 @@ import {Footer} from "../../components/Footer";
 
 import closeIcon from "../../assets/icons/Close.svg";
 import SearchIcon from "../../assets/icons/Search.svg";
+import { useAuth } from "../../hooks/auth";
 
 export function Menu() {
   const navigate = useNavigate();
+  const {user, signOut} = useAuth();
   const [search, setSearch] = useState("");
 
-  const isAdmin = true;
+  const isAdmin = (user.role === "admin");
 
   function handleCloseMenu() {
     navigate(-1);
   };
-  function redirectToNewDish() {
+  function handleRedirectToNewDish() {
     navigate("/new-dish");
+  };
+
+  function handleSignOut() {
+    navigate("/");
+    signOut();
   };
 
   return(
@@ -38,9 +45,9 @@ export function Menu() {
           
         <MenuItem>
           { isAdmin &&
-            <p onClick={redirectToNewDish} >Novo prato</p>
+            <p onClick={handleRedirectToNewDish} >Novo prato</p>
           }
-          <p>Sair</p>
+          <p onClick={handleSignOut}>Sair</p>
         </MenuItem>
       </Main>
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 
 import {Container, Form} from "./styles";
 import {Input} from "../../components/Input";
@@ -12,12 +13,16 @@ export function SignIn() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  const {signIn} = useAuth();
 
-  function handleLogin() {
+  function handleLogin(event) {
+    event.preventDefault();
     if(!email || !password) {
-      alert("Você precisa preencher os campos de email e senha para fazer Login.");
+      return alert("Você precisa preencher os campos de email e senha para fazer Login.");
     };
-    return
+
+    signIn({email, password});
   };
 
   function handleRedirectToSignUp() {
@@ -50,7 +55,7 @@ export function SignIn() {
 
         <Button 
           text="Entrar"
-          onClick={handleLogin}
+          onClick={event => handleLogin(event)}
         />
         <ButtonText text="Criar uma conta" onClick={handleRedirectToSignUp} /> 
       </Form>
