@@ -6,7 +6,8 @@ export const Container = styled.div`
   display: flex;
   gap: 1.4rem;
 
-  > img {
-    cursor: pointer;
+  > button {
+    display: flex;
+    align-items: center;
   }
 `;

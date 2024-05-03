@@ -3,11 +3,11 @@ import { Container, InputElement } from "./styles";
 
 import SearchIcon from "../../assets/icons/Search.svg";
 
-export function Input({Icon, isSearch, ...rest}) {
+export function Input({Icon, isSearch, className, ...rest}) {
   const [inputValue, setInputValue] = useState("");
 
   return(
-    <Container >
+    <Container className={className} >
       { Icon && 
         <img src={Icon} 
           className={inputValue === "" ? "" : "hide-icon"}
@@ -18,7 +18,7 @@ export function Input({Icon, isSearch, ...rest}) {
       }
       
       <InputElement 
-        onChange={e => setInputValue(e.target.value)} 
+        onChange={e => setInputValue(e.target.value)}
         {...rest}
       />
     </Container>

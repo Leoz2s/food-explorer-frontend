@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.footer`
   padding: 2.4rem 1.23rem;
@@ -33,7 +34,7 @@ export const Container = styled.footer`
     text-align: right;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     padding-inline: 12.3rem;
     justify-content: space-between;
   }

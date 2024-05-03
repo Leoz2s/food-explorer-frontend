@@ -1,4 +1,5 @@
 import {styled} from 'styled-components';
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   width: 100%;
@@ -58,7 +59,7 @@ export const Message = styled.div`
     display: none;
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
     margin-top: 11.4rem;
 
     width: calc(70rem + 10vw);
@@ -104,7 +105,7 @@ export const Message = styled.div`
     }
   }
 
-  @media (min-width: 1300px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
     margin-top: 16.4rem;
 
     width: 112rem;
@@ -142,7 +143,7 @@ export const Main = styled.main`
     }
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
     > .dishes-group {
       > div {
         width: 25.6rem;

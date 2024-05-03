@@ -1,24 +1,20 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {Container, Header, Main, MenuItem} from "./styles";
-import {Input} from "../../components/Input";
-import {Footer} from "../../components/Footer";
+import {Input} from "../Input";
+import {Footer} from "../Footer";
 
 import closeIcon from "../../assets/icons/Close.svg";
 import SearchIcon from "../../assets/icons/Search.svg";
 import { useAuth } from "../../hooks/auth";
 
-export function Menu() {
+export function SideMenu({menuIsOpen, onCloseMenu, onSearch}) {
   const navigate = useNavigate();
   const {user, signOut} = useAuth();
-  const [search, setSearch] = useState("");
 
   const isAdmin = (user.role === "admin");
 
-  function handleCloseMenu() {
-    navigate(-1);
-  };
   function handleRedirectToNewDish() {
     navigate("/new-dish");
   };
@@ -29,9 +25,13 @@ export function Menu() {
   };
 
   return(
-    <Container >
+    <Container data-menu-is-open={menuIsOpen} >
       <Header>
-        <img src={closeIcon} alt="Close icon" onClick={handleCloseMenu}/>
+        { menuIsOpen &&
+          <button>
+            <img src={closeIcon} alt="Close icon" onClick={onCloseMenu}/>
+          </button>
+        }
         <h1>Menu</h1>
       </Header>
 
@@ -40,14 +40,18 @@ export function Menu() {
           type="text"
           placeholder="Busque por pratos ou ingredientes" 
           Icon={SearchIcon}
-          onChange={e => setSearch(e.target.value)}
+          onChange={e => onSearch(e.target.value)}
         />
           
         <MenuItem>
           { isAdmin &&
-            <p onClick={handleRedirectToNewDish} >Novo prato</p>
+            <button>
+              <p onClick={handleRedirectToNewDish} >Novo prato</p>
+            </button>
           }
-          <p onClick={handleSignOut}>Sair</p>
+          <button>
+            <p onClick={handleSignOut}>Sair</p>
+          </button>
         </MenuItem>
       </Main>
 

@@ -31,8 +31,10 @@ export const Container = styled.div`
     width: var(--image-size);
   }
 
-  > p {
+  p {
     cursor: pointer;
+    width: fit-content;
+    text-align: center;
 
     font-family: Poppins;
     font-size: 1.4rem;
@@ -53,7 +55,7 @@ export const Container = styled.div`
     color: ${({theme}) => theme.TINTS.CAKE_100}
   }
 
-  > button {
+  > button:last-child {
     width: 16.2rem;
     height: 3.2rem;
     padding: 1.2rem 2.4rem;

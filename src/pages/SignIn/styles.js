@@ -1,4 +1,5 @@
 import {styled} from 'styled-components';
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   display: grid;
@@ -24,7 +25,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     grid-template-columns: 1fr 1fr;
 
     > form {
@@ -68,7 +69,7 @@ export const Form = styled.form`
     }
   }
 
-  > a {
+  button:last-child {
     justify-self: center;
   }
 `;

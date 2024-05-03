@@ -149,14 +149,11 @@ export function DishForm() {
       <Header />
 
       <Main>
-        <ButtonText 
-          Icon={CaretLeftIcon} text="voltar"
-          onClick={handleReturn} 
-        />
+        <ButtonText Icon={CaretLeftIcon} text="voltar" onClick={handleReturn} />
         <h2>{editingDish ? "Editar prato" : "Novo prato"}</h2>
 
         <Form>
-          <Image_Name_Category_Inputs id="image-name-category">
+          <Image_Name_Category_Inputs>
             <div className="input-wrap image-input">
               <p>Imagem do prato</p>
 
@@ -229,7 +226,7 @@ export function DishForm() {
             </div>
           </Image_Name_Category_Inputs>
 
-          <Ingredients_Price_Inputs id="ingredients-price">
+          <Ingredients_Price_Inputs>
             <div className="input-wrap ingredients-input">
               <p>Ingredientes</p>
               <div className="ingredients-group">

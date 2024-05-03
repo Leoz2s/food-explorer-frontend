@@ -28,15 +28,15 @@ export function NumericStepper({amountvalue, ...rest}) {
 
   return(
     <Container {...rest} >
-      <img src={MinusIcon} alt="Ícone de menos."
-        onClick={handleMinus}
-      />
+      <button onClick={handleMinus} >
+        <img src={MinusIcon} alt="Ícone de menos." />
+      </button>
       {
         amount < 10 ? amount.toString().padStart(2, '0') : amount
       }
-      <img src={PlusIcon} alt="ícone de mais." 
-        onClick={handlePlus}
-      />
+      <button onClick={handlePlus} >
+        <img src={PlusIcon} alt="ícone de mais." />
+      </button>
     </Container>
   );
 };

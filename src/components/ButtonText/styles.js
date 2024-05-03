@@ -1,6 +1,6 @@
 import {styled} from 'styled-components';
 
-export const Container = styled.a`
+export const Container = styled.button`
   font-family: Poppins;
   font-weight: 500;
   font-size: 1.4rem;

@@ -1,4 +1,5 @@
 import {styled} from 'styled-components';
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   height: 100vh;
@@ -20,12 +21,14 @@ export const Main = styled.main`
   justify-self: center;
   max-width: 76.8rem;
 
-  > a {
+  > button {
     font-size: 2.4rem;
     color: ${({theme}) => theme.LIGHT.LIGHT_300};
+
+    width: fit-content;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     max-width: fit-content;
   }
 `;
@@ -43,7 +46,7 @@ export const Dish = styled.div`
     height: 26.4rem;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     flex-direction: row;
     gap: 4.7rem;
   }
@@ -93,7 +96,7 @@ export const DishInfosAndActions = styled.div`
     }
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     display: grid;
     justify-items: flex-start;
 
@@ -104,13 +107,13 @@ export const DishInfosAndActions = styled.div`
         font-family: Poppins;
         font-weight: 500;
         font-size: 4rem;
-        line-height: 140%; /* 56px */
+        line-height: 140%;
       }
       p {
         font-family: Poppins;
         font-weight: 400;
         font-size: 2.4rem;
-        line-height: 140%; /* 33.6px */
+        line-height: 140%; 
 
         text-align: start;
       }

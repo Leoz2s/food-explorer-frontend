@@ -57,7 +57,8 @@ export function SignIn() {
           text="Entrar"
           onClick={event => handleLogin(event)}
         />
-        <ButtonText text="Criar uma conta" onClick={handleRedirectToSignUp} /> 
+
+        <ButtonText text="Criar uma conta" onClick={handleRedirectToSignUp} />
       </Form>
     </Container>
   );

@@ -14,9 +14,6 @@ import CaretRightIcon from "../../assets/icons/CaretRight.svg";
 
 import message_image from "../../assets/images/message-image.png";
 import desktop_message_image from "../../assets/images/desktop-message-image.png";
-import dish_mask from "../../assets/images/dishes-and-drinks-mask-group/0-Dish.png"
-import dish_mask_1 from "../../assets/images/dishes-and-drinks-mask-group/1-Dish.png"
-import dish_mask_2 from "../../assets/images/dishes-and-drinks-mask-group/2-Dish.png"
 import { useAuth } from "../../hooks/auth";
 
 export function Home() {
@@ -26,24 +23,19 @@ export function Home() {
   const [dishes, setDishes] = useState([]);
   const [favorites, setFavorites] = useState({});
   const [sliderSize, setSliderSize] = useState(2);
+  const [search, setSearch] = useState("");
 
   const role = user.role;
 
   const SplideConfig = {
     perPage: sliderSize,
     autoWidth: true,
-    // gap    : '-4rem',
-
-    // breakpoints: {
-    //   1000: {
-    //     perPage: 4,
-    //   },
-    // },
+    gap: '.8rem',
   };
 
   useEffect(() => {
     async function fetchDishes() {
-      const response = await api.get(`/dishes?name=&ingredients=`);
+      const response = await api.get(`/dishes?name=${search}&ingredients=${search}`);
       setDishes(response.data);
     };
     fetchDishes();
@@ -66,11 +58,11 @@ export function Home() {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [search]);
 
   return(
     <Container >
-      <Header />
+      <Header onSearch={setSearch} />
 
       <Main>
         <Message>

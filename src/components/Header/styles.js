@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.header`
   padding-block: 5.6rem 2.4rem;
@@ -7,18 +8,18 @@ export const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2.6rem;
+  gap: calc(1.6rem + 10vw);
 
   > img {
     cursor: pointer;
   }
 
-  .desktop,
-  > div > img:nth-child(1) {
+  .desktop {
     display: none;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    justify-content: center;
     gap: 3.2rem;
 
     .mobile {
@@ -42,6 +43,10 @@ export const Container = styled.header`
       width: 21.6rem;
       border-radius: 5px;
     }
+
+    > button.log-out-button {
+      width: fit-content;
+    }
   }
 `;
 
@@ -50,7 +55,7 @@ export const Logo = styled.div`
   align-items: center;
   gap: .8rem;
 
-  > h1 {
+  h1 {
     display: flex;
     align-items: center;
     gap: .8rem;
@@ -62,12 +67,12 @@ export const Logo = styled.div`
     cursor: pointer;
   }
 
-  > span {
+  span {
     font-size: 1.2rem;
     color: ${({theme}) => theme.TINTS.CAKE_100};
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     flex-direction: column;
     align-items: flex-end;
     gap: 0;

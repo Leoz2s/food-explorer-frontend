@@ -18,19 +18,20 @@ export function Details() {
   const navigate = useNavigate();
   const params = useParams();
   const {user} = useAuth();
-
+  
   const [data, setData] = useState({});
   const [amount, setAmount] = useState({});
 
+  const image = `${api.defaults.baseURL}/files/${data.image}`;
   const isAdmin = (user.role === "admin");
-
+  
   function handleReturn() {
     navigate(-1);
   };
   function handleRedirectToEdit() {
     navigate(`/edit-dish/${data.id}`);
   };
-
+  
   useEffect(() => {
     async function fetchDish() {
       const response = await api.get(`/dishes/${params.id}`);
@@ -45,14 +46,10 @@ export function Details() {
       <Header />
 
       <Main>
-        <ButtonText 
-          Icon={CaretLeftIcon}
-          text="voltar" 
-          onClick={handleReturn}
-        />
+        <ButtonText Icon={CaretLeftIcon} text="voltar" onClick={handleReturn} />
 
         <Dish>
-          <img src={data.image} alt="Foto do prato" />
+          <img src={image} alt="Foto do prato" />
 
           <DishInfosAndActions>
             <div className="dish-info">

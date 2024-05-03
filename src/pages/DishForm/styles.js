@@ -1,4 +1,5 @@
 import {styled} from 'styled-components';
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   display: grid;
@@ -22,7 +23,10 @@ export const Main = styled.main`
   font-weight: 500;
   color: ${({theme}) => theme.LIGHT.LIGHT_300};
 
-  a img {
+  > button {
+    width: fit-content;
+  }
+  > button img {
     width: 1.5rem;
     height: 1.5rem;
   }
@@ -32,14 +36,14 @@ export const Main = styled.main`
     font-family: 3.2rem;
   }
 
-  @media (min-width: 1000px) {
-    a {
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    > button {
       margin-top: 4rem;
 
       font-weight: 700;
       font-size: 2.4rem;
     }
-    a img {
+    > button img {
       width: 2.8rem;
       height: 2.6rem;
     }
@@ -94,15 +98,7 @@ export const Form = styled.form `
     }
   }
 
-  @media (min-width: 1000px) {
-    > #image-name-category,
-      #ingredients-price {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 3.2rem;
-    }
-
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     > #buttons-group {
       justify-content: flex-end;
 
@@ -114,6 +110,9 @@ export const Form = styled.form `
 `;
 
 export const Image_Name_Category_Inputs = styled.div`
+  display: grid;
+  gap: 2.4rem;
+
   > .image-input input {
     display: none;
   }
@@ -125,10 +124,11 @@ export const Image_Name_Category_Inputs = styled.div`
     }
   }
 
-  @media (min-width: 1000px) {
-    &#image-name-category {
-
-    }
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3.2rem;
 
     > .image-input {
       min-width: 22.9rem;
@@ -145,6 +145,9 @@ export const Image_Name_Category_Inputs = styled.div`
 `;
 
 export const Ingredients_Price_Inputs = styled.div`
+  display: grid;
+  gap: 2.4rem;
+
   > .ingredients-input .ingredients-group {
     display: flex;
     align-items: center;
@@ -177,13 +180,11 @@ export const Ingredients_Price_Inputs = styled.div`
     }
   }
   
-  @media (min-width: 1000px) {
-    &#ingredients-price {
-      display: grid;
-      grid-template-areas: "Ingredients Price";
-      grid-template-columns: 1fr 25.1rem;
-      gap: 2.4rem;
-    }
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: grid;
+    grid-template-areas: "Ingredients Price";
+    grid-template-columns: 1fr 25.1rem;
+    gap: 2.4rem;
 
     > .ingredients-input .ingredients-group {
       min-height: 4.8rem;

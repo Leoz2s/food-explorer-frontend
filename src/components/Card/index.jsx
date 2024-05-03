@@ -14,11 +14,12 @@ import caretRightIcon from "../../assets/icons/CaretRight.svg"
 
 export function Card({data, favorites, ...rest}) {
   const navigate = useNavigate();
+  const {user} = useAuth();
+  const image = `${api.defaults.baseURL}/files/${data.image}`;
+  
   const [amountValue, setAmountValue] = useState(0);
   const [favorited, setFavorited] = useState(false);
-  const [image, setImage] = useState("");
-  const {user} = useAuth();
-
+  
   function addToFavorites() {
     favorites.id = data.id;
     setFavorited(true);
@@ -45,42 +46,34 @@ export function Card({data, favorites, ...rest}) {
     } else {
       setFavorited(false);
     }
-
-    async function fetchImage() {
-      const response = await api.get(`/files/${data.image}`);
-      setImage(`http://localhost:3333/files/${data.image}`);
-    };
-    fetchImage();
-
   }, [favorited]);
 
   return(
     <Container {...rest} >
       { 
         user.role === "admin" &&  
-        <img src={editIcon} alt="ícone de edição" 
-          className="action-icon"
-          onClick={redirectToEditDish}
-        />
+        <button className="action-icon" onClick={redirectToEditDish} >
+          <img src={editIcon} alt="ícone de edição" />
+        </button>
         ||
         favorited === false && 
-        <img src={favoriteIcon} alt="ícone de prato não favoritado" 
-          className="action-icon"
-          onClick={addToFavorites}
-        />
+        <button className="action-icon" onClick={addToFavorites} >
+          <img src={favoriteIcon} alt="ícone de prato não favoritado" />
+        </button>
         ||
         favorited === true && 
-        <img src={filledFavoriteIcon} alt="ícone de prato favoritado" 
-          className="action-icon"
-          onClick={removeFromFavorites}
-        />
+        <button className="action-icon" onClick={removeFromFavorites} >
+          <img src={filledFavoriteIcon} alt="ícone de prato favoritado" />
+        </button>
       }
 
       <img src={image} alt="Foto do consumível" className="dish-image" />
       
-      <p onClick={redirectToDishDetails}>
-        {data.name} <img src={caretRightIcon} />
-      </p>
+      <button onClick={redirectToDishDetails}>
+        <p>
+          {data.name} <img src={caretRightIcon} />
+        </p>
+      </button>
 
       <span>{data.price}</span>
 
