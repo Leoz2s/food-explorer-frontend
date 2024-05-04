@@ -26,10 +26,14 @@ export function Details() {
   const isAdmin = (user.role === "admin");
   
   function handleReturn() {
-    navigate(-1);
+    navigate("/");
   };
   function handleRedirectToEdit() {
     navigate(`/edit-dish/${data.id}`);
+  };
+
+  function addDish() {
+    console.log(`${amount} unidades de ${data.name} foram adicionadas!`)
   };
   
   useEffect(() => {
@@ -73,7 +77,8 @@ export function Details() {
               { isAdmin === false && 
                 <Button 
                   Icon={ReceiptIcon}
-                  text={`pedir ∙ ${data.price}`} 
+                  text={`pedir ∙ ${data.price}`}
+                  onClick={addDish} 
                 />
               }
               { isAdmin === true &&

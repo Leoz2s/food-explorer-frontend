@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   width: 21rem;
@@ -17,6 +18,10 @@ export const Container = styled.div`
 
   position: relative;
 
+  .desktop {
+    display: none;
+  }
+
   > .action-icon {
     position: absolute;
     top: 1.6rem;
@@ -31,7 +36,7 @@ export const Container = styled.div`
     width: var(--image-size);
   }
 
-  p {
+  h3 {
     cursor: pointer;
     width: fit-content;
     text-align: center;
@@ -55,13 +60,75 @@ export const Container = styled.div`
     color: ${({theme}) => theme.TINTS.CAKE_100}
   }
 
-  > button:last-child {
-    width: 16.2rem;
-    height: 3.2rem;
-    padding: 1.2rem 2.4rem;
-
+  > .stepper-button {
     display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
     align-items: center;
-    justify-content: center;
+    
+    > button:last-child {
+      width: 16.2rem;
+      height: 3.2rem;
+      padding: 1.2rem 2.4rem;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    width: 30.4rem;
+    height: 46.2rem;
+
+    gap: 1.5rem;
+
+    .desktop {
+      display: block;
+    }
+
+    > .dish-image {
+      --image-size: 17.6rem;
+    }
+
+    h3 {
+      font-size: 2.4rem;
+      font-weight: 700;
+
+      img {
+        width: 1rem;
+        height: 1.3rem;
+      }
+    }
+
+    > p {
+      color: var(--Light-Light-400, #C4C4CC);
+      text-align: center;
+
+      font-family: Roboto;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%; /* 22.4px */
+    }
+
+    > span {
+      font-family: Roboto;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%; /* 51.2px */
+    }
+
+    > .stepper-button {
+      flex-direction: row;
+
+      > button:last-child {
+        width: 9.2rem;
+        height: 4.8rem;
+      }
+    }
   }
 `;

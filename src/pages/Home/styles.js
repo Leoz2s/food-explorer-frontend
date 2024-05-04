@@ -13,12 +13,13 @@ export const Container = styled.div`
   grid-template-rows: 11.4rem auto 7.7rem;
 `;
 
-export const Message = styled.div`
+export const Banner = styled.div`
   margin-block: 4.4rem 6.2rem;
 
   background-image: ${({theme}) => theme.GRADIENTS.GRADIENT_200};
   width: 34.6rem;
   height: 12rem;
+  border-radius: 8px;
   
   display: flex;
   justify-content: flex-end;
@@ -66,8 +67,6 @@ export const Message = styled.div`
     max-width: 112rem;
     height: calc(12.5rem + 8vw);
     max-height: 26rem;
-
-    border-radius: 8px;
 
     > .mobile {
       display: none;
@@ -126,13 +125,20 @@ export const Main = styled.main`
 
   padding-left: 2.4rem;
 
+  > h3 {
+    color: ${({theme}) => theme.LIGHT.LIGHT_300};
+    font-family: Poppins, sans-serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
   > .dishes-group {
     margin-block: 2.4rem;
 
     display: flex;
     gap: 1.6rem;
 
-    overflow-x: hidden;
+    overflow: hidden;
 
     section {
       max-width: 100vw;
@@ -144,7 +150,13 @@ export const Main = styled.main`
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+    > h3 {
+      font-size: 3.2rem;
+    }
+
     > .dishes-group {
+      gap: 2.5rem;
+
       > div {
         width: 25.6rem;
         height: 41.1rem;

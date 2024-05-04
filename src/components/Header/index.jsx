@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import {USER_ROLE} from "../../utils/roles";
 
 import { Container, Logo, ReceiptWrapper } from "./styles";
 import {SideMenu} from "../SideMenu";
@@ -17,7 +18,7 @@ export function Header({onSearch, ...rest}) {
   const {user, signOut} = useAuth();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
-  const isAdmin = (user.role === "admin");
+  const isAdmin = [USER_ROLE.ADMIN,].includes(user.role);
 
   function handleRedirectToHome() {
     navigate("/");

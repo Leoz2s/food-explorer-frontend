@@ -4,7 +4,7 @@ import { api } from "../../services/api";
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/splide/css/skyblue';
 
-import {Container, Message, Main} from "./styles";
+import {Container, Banner, Main} from "./styles";
 import {Header} from "../../components/Header";
 import {Card} from "../../components/Card";
 import {Footer} from "../../components/Footer";
@@ -14,18 +14,12 @@ import CaretRightIcon from "../../assets/icons/CaretRight.svg";
 
 import message_image from "../../assets/images/message-image.png";
 import desktop_message_image from "../../assets/images/desktop-message-image.png";
-import { useAuth } from "../../hooks/auth";
 
 export function Home() {
-  const navigate = useNavigate();
-  const {user} = useAuth();
-
   const [dishes, setDishes] = useState([]);
-  const [favorites, setFavorites] = useState({});
+  const [favorites, setFavorites] = useState([]);
   const [sliderSize, setSliderSize] = useState(2);
   const [search, setSearch] = useState("");
-
-  const role = user.role;
 
   const SplideConfig = {
     perPage: sliderSize,
@@ -34,15 +28,11 @@ export function Home() {
   };
 
   useEffect(() => {
-    async function fetchDishes() {
-      const response = await api.get(`/dishes?name=${search}&ingredients=${search}`);
+    async function fetchDishes() {      
+      const response = await api.get(`/dishes?name=${search}&ingredients=${search}&`);
       setDishes(response.data);
     };
     fetchDishes();
-
-    setFavorites(
-      {id: 6,},
-    );
 
     function handleResize() {
       if(window.innerWidth < 450) {
@@ -65,14 +55,14 @@ export function Home() {
       <Header onSearch={setSearch} />
 
       <Main>
-        <Message>
+        <Banner>
           <img className="mobile" src={message_image} alt="Food image" />
           <img className="desktop" src={desktop_message_image} alt="Food image" />
           <div id="message-content">
             <h2>Sabores inigualáveis</h2>
             <p>Sinta o cuidado do preparo com ingredientes selecionados.</p>
           </div>
-        </Message>
+        </Banner>
 
         <h3>Refeições</h3>
         <div className="dishes-group">

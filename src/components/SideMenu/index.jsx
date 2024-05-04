@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {USER_ROLE} from "../../utils/roles";
 
 import {Container, Header, Main, MenuItem} from "./styles";
 import {Input} from "../Input";
@@ -13,7 +13,7 @@ export function SideMenu({menuIsOpen, onCloseMenu, onSearch}) {
   const navigate = useNavigate();
   const {user, signOut} = useAuth();
 
-  const isAdmin = (user.role === "admin");
+  const isAdmin = [USER_ROLE.ADMIN,].includes(user.role);
 
   function handleRedirectToNewDish() {
     navigate("/new-dish");
