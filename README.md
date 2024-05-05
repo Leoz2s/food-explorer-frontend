@@ -25,7 +25,7 @@ Exclusivo para Admin:
 
 
 ## Tech Stack & Dependências 🛠
-- JavaScript - React.js
+- JavaScript - React.js - HTML - CSS
 Dependências:
 - axios - react-dom - react-router-dom - styled-components - splidejs
 
