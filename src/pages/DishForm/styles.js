@@ -23,6 +23,13 @@ export const Main = styled.main`
   font-weight: 500;
   color: ${({theme}) => theme.LIGHT.LIGHT_300};
 
+  animation: disapper_appear .5s ease-in-out;
+  @keyframes disapper_appear {
+    0% {
+      opacity: 0;
+    }
+  }
+
   > button {
     width: fit-content;
   }

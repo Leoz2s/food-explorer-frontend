@@ -75,15 +75,21 @@ export function Details() {
               }
 
               { isAdmin === false && 
-                <Button 
+                <Button className="mobile"
                   Icon={ReceiptIcon}
                   text={`pedir ∙ ${data.price}`}
                   onClick={addDish} 
                 />
               }
+              { isAdmin === false && 
+                <Button className="desktop" 
+                  text={`incluir ∙ ${data.price}`}
+                  onClick={addDish}
+                />
+              }
               { isAdmin === true &&
-                <Button 
-                  text={`Editar prato`} className="edit-button" 
+                <Button className="edit-button"
+                  text={`Editar prato`} 
                   onClick={handleRedirectToEdit}
                 />
               }

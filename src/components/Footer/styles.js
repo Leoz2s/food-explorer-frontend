@@ -36,6 +36,6 @@ export const Container = styled.footer`
 
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     padding-inline: 12.3rem;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 `;

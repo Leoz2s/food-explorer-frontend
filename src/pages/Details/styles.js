@@ -23,19 +23,43 @@ export const Main = styled.main`
 
   > button {
     font-size: 2.4rem;
+    font-weight: 500;
     color: ${({theme}) => theme.LIGHT.LIGHT_300};
 
     width: fit-content;
   }
 
+  .desktop {
+    display: none;
+  }
+
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     max-width: fit-content;
+
+    > button {
+      font-weight: 700;
+    }
+
+    .desktop {
+      display: block;
+    }
+    .mobile {
+      display: none;
+    }
   }
 `;
 
 export const Dish = styled.div`
   display: flex;
   flex-direction: column;
+
+  animation: down_up 1s ease-in-out;
+  @keyframes down_up {
+    0% {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+  }
 
   > img {
     align-self: center;
@@ -49,6 +73,13 @@ export const Dish = styled.div`
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     flex-direction: row;
     gap: 4.7rem;
+
+    margin-top: 4.2rem;
+
+    > img {
+      width: 39rem;
+      height: 38.9rem;
+    }
   }
 `;
 
@@ -76,6 +107,7 @@ export const DishInfosAndActions = styled.div`
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      align-content: center;
       gap: 2.4rem;
     }
   } 
@@ -88,6 +120,10 @@ export const DishInfosAndActions = styled.div`
     justify-content: center;
     gap: 1.6rem;
 
+    > button {
+      font-size: 1.1rem;
+    }
+
     .edit-button {
       width: 100%;
       max-width: 31.6rem;
@@ -99,6 +135,7 @@ export const DishInfosAndActions = styled.div`
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     display: grid;
     justify-items: flex-start;
+    align-content: center;
 
     > .dish-info {
       justify-items: flex-start;
@@ -116,6 +153,28 @@ export const DishInfosAndActions = styled.div`
         line-height: 140%; 
 
         text-align: start;
+      }
+
+      .ingredients-group {
+        gap: 1.2rem;
+      }
+    }
+
+    > .action-group {
+      gap: 3.3rem;
+
+      > div {
+        color: ${({theme}) => theme.LIGHT.LIGHT_300};
+        font-size: 2rem;
+        font-weight: 700;
+      }
+
+      > button {
+        font-size: 1.4rem;
+
+        img {
+          display: none;
+        }
       }
     }
   }

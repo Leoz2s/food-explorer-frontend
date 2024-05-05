@@ -32,7 +32,7 @@ export function NumericStepper({amountvalue, ...rest}) {
         <img src={MinusIcon} alt="Ícone de menos." />
       </button>
       {
-        amount < 10 ? amount.toString().padStart(2, '0') : amount
+        (amount < 10) ? amount.toString().padStart(2, '0') : amount
       }
       <button onClick={handlePlus} >
         <img src={PlusIcon} alt="ícone de mais." />

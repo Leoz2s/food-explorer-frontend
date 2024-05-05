@@ -14,6 +14,8 @@ export const Container = styled.div`
   align-content: center;
   gap: 1.2rem;
   
+  margin-right: 1.6rem;
+
   flex-shrink: 0;
 
   position: relative;
@@ -83,6 +85,8 @@ export const Container = styled.div`
     width: 30.4rem;
     height: 46.2rem;
 
+    margin-right: 2.7rem;
+
     gap: 1.5rem;
 
     .desktop {
@@ -104,22 +108,17 @@ export const Container = styled.div`
     }
 
     > p {
-      color: var(--Light-Light-400, #C4C4CC);
-      text-align: center;
-
-      font-family: Roboto;
+      font-family: Roboto, sans-serif;
       font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 160%; /* 22.4px */
+      line-height: 160%;
+      color: var(--Light-Light-400, #C4C4CC);
+
+      text-align: center;
     }
 
     > span {
-      font-family: Roboto;
+      font-family: Roboto, sans-serif;
       font-size: 32px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 160%; /* 51.2px */
     }
 
     > .stepper-button {

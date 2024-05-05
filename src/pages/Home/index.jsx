@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/splide/css/skyblue';
@@ -18,13 +17,15 @@ import desktop_message_image from "../../assets/images/desktop-message-image.png
 export function Home() {
   const [dishes, setDishes] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [sliderSize, setSliderSize] = useState(2);
+  const [sliderPerPage, setSliderPerPage] = useState(2);
+  const [sliderSize, setSliderSize] = useState("100%");
   const [search, setSearch] = useState("");
 
   const SplideConfig = {
-    perPage: sliderSize,
+    perPage: sliderPerPage,
     autoWidth: true,
-    gap: '.8rem',
+    width: sliderSize,
+    rewind: true,
   };
 
   useEffect(() => {
@@ -34,20 +35,27 @@ export function Home() {
     };
     fetchDishes();
 
-    function handleResize() {
+    function handleSliderResize() {
       if(window.innerWidth < 450) {
-        setSliderSize(1);
+        setSliderPerPage(1);
+        setSliderSize("100%");
       }else if(window.innerWidth < 675) {
-        setSliderSize(2);
+        setSliderPerPage(2);
+        setSliderSize("100%");
       }else if(window.innerWidth < 800) {
-        setSliderSize(3);
-      }else if(window.innerWidth > 900){
-        setSliderSize(4);
+        setSliderPerPage(3);
+        setSliderSize("100%");
+      }else if(window.innerWidth < 1099) {
+        setSliderPerPage(3);
+        setSliderSize("100%");
+      }else if(window.innerWidth > 1100){
+        setSliderPerPage(4);
+        setSliderSize("112.2rem");
       };
     };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    handleSliderResize();
+    window.addEventListener("resize", handleSliderResize);
+    return () => window.removeEventListener("resize", handleSliderResize);
   }, [search]);
 
   return(
@@ -72,7 +80,7 @@ export function Home() {
                 dishes.map((dish, index) => (
                   <SplideSlide key={index}>
                     { dish.category == "Refeição" &&
-                      <Card key={dish.id} data={dish} favorites={favorites} />
+                      <Card key={dish.id} data={dish} />
                     }
                   </SplideSlide>
                 ))
@@ -98,7 +106,7 @@ export function Home() {
               dishes.map((dish, index) => (
                 <SplideSlide key={index}>
                     { dish.category == "Sobremesa" &&
-                      <Card key={dish.id} data={dish} favorites={favorites} />
+                      <Card key={dish.id} data={dish} />
                     }
                 </SplideSlide>
               ))
@@ -124,7 +132,7 @@ export function Home() {
               dishes.map((dish, index) => (
                 <SplideSlide key={index}>
                   { dish.category == "Bebida" &&
-                    <Card key={dish.id} data={dish} favorites={favorites} />
+                    <Card key={dish.id} data={dish} />
                   }
                 </SplideSlide>
               ))
@@ -143,7 +151,6 @@ export function Home() {
         </div>
         
       </Main>
-      
 
       <Footer />
     </Container>

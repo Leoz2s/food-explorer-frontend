@@ -26,6 +26,14 @@ export const Banner = styled.div`
   margin-inline: auto;
 
   position: relative;
+
+  animation: right_sliding 1s ease-in-out;
+  @keyframes right_sliding {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%);
+    }
+  }
   
   > img {
     width: 19.1rem;
@@ -95,7 +103,7 @@ export const Banner = styled.div`
       h2 {
         font-size: 4rem;
         font-weight: 500;
-        line-height: 140%; /* 56px */
+        line-height: 140%;
       }
       p {
         font-family: Roboto;
@@ -115,6 +123,10 @@ export const Banner = styled.div`
       height: 40.6rem;
 
       top: -14.5rem;
+    }
+
+    > #message-content {
+      margin-right: 10rem;
     }
   }
 `;
@@ -136,12 +148,19 @@ export const Main = styled.main`
     margin-block: 2.4rem;
 
     display: flex;
-    gap: 1.6rem;
 
     overflow: hidden;
 
     section {
       max-width: 100vw;
+
+      animation: left_sliding 1s ease-in-out;
+      @keyframes left_sliding {
+        0% {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+      }
 
       .splide__arrows {
         display: none;
@@ -155,8 +174,6 @@ export const Main = styled.main`
     }
 
     > .dishes-group {
-      gap: 2.5rem;
-
       > div {
         width: 25.6rem;
         height: 41.1rem;
@@ -171,16 +188,17 @@ export const Main = styled.main`
         }
         .splide__arrow {
           height: 8.2rem;
-          /* width: 4rem; */
-          /* background-image: ${({theme}) => theme.GRADIENTS.GRADIENT_100}; */
+
         }
         .splide__arrow--prev {          
           justify-content: left;
-          /* width: 18rem; */
         }
         .splide__arrow--next {
           justify-content: left;
-          /* width: 18rem; */
+          
+          background-image: ${({theme}) => theme.GRADIENTS.GRADIENT_100};
+          height: 100%;
+          margin-right: -1.4rem;
         }
       }
     }

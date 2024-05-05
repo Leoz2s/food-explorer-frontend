@@ -36,6 +36,14 @@ export const Container = styled.div`
       width: auto;
       max-width: 47.6rem;
 
+      animation: up_down .7s ease-in-out;
+      @keyframes up_down {
+        0% {
+          opacity: 0;
+          transform: translateY(-50%);
+        } 
+      }
+
       #desktop-title {
         display: block;
         text-align: center;

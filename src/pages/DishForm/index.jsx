@@ -46,13 +46,22 @@ export function DishForm() {
   async function handleCreateDish(e) {
     e.preventDefault();
     
-    if(!name || category === "Selecione a categoria" || !ingredients || !price || !description ) {
+    if(!name || category === "Selecione a categoria" || !ingredients[0] || !price || !description ) {
       return alert("Preencher todos os campos é necessário para criar um novo prato.");
     }else if(newIngredient) {
       return alert("Um novo ingrediente foi deixado no campo de novos ingredientes. Adicione o novo ingrediente ou esvazie o campo.");
     };
     
-    await api.post("/dishes", {name, category, ingredients, price, description});
+    const response = await api.post("/dishes", {name, category, ingredients, price, description});
+    
+    if(image) {
+      const {dish_id} = response.data;
+
+      const fileUploadForm = new FormData();
+      fileUploadForm.append("image", image);
+      
+      await api.patch(`/dishes/${dish_id}/image`, fileUploadForm);
+    };
     
     alert("Prato criado com sucesso!");
     navigate("/");
@@ -87,7 +96,6 @@ export function DishForm() {
         const fileUploadForm = new FormData();
         fileUploadForm.append("image", image);
         
-        console.log(fileUploadForm)
         await api.patch(`/dishes/${params.id}/image`, fileUploadForm);
       };
       
@@ -109,7 +117,7 @@ export function DishForm() {
     setImage(file);
   };
   
-  function formatPrice(value) {
+  function handleFormatPrice(value) {
     if(value > 0) {
       let formatedPrice = String("R$ " + value).replace('.', ',');
       if(formatedPrice.includes(',')){
@@ -175,7 +183,6 @@ export function DishForm() {
 
               <Select>
                 <div id="category-select">
-                  {/* <label htmlFor="options-view-button">Categoria</label> */}
                   <input type="checkbox" id="options-view-button" />
 
                   <div id="select-button">
@@ -255,7 +262,7 @@ export function DishForm() {
               <Input 
                 type="number"
                 placeholder={editingDish ? data.price : "R$ 00,00"}
-                onChange={e => formatPrice(e.target.value)}
+                onChange={e => handleFormatPrice(e.target.value)}
               />
             </div>
           </Ingredients_Price_Inputs>

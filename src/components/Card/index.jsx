@@ -13,7 +13,7 @@ import filledFavoriteIcon from "../../assets/icons/HeartFilled.svg"
 import editIcon from "../../assets/icons/Pencil.svg"
 import caretRightIcon from "../../assets/icons/CaretRight.svg"
 
-export function Card({data, favorites, ...rest}) {
+export function Card({data, ...rest}) {
   const navigate = useNavigate();
   const {user} = useAuth();
   const image = `${api.defaults.baseURL}/files/${data.image}`;
@@ -23,14 +23,15 @@ export function Card({data, favorites, ...rest}) {
   const [amountValue, setAmountValue] = useState(0);
   const [favorited, setFavorited] = useState(false);
   
-  function addToFavorites() {
-    favorites.id = data.id;
+  async function addToFavorites() {
+    await api.post(`/dishes/${data.id}/favorites`);
     setFavorited(true);
   };
-  function removeFromFavorites() {
-    favorites.id = 0;
+  async function removeFromFavorites() {
+    await api.delete(`/dishes/${data.id}/favorites`);
     setFavorited(false);
   };
+
   function redirectToDishDetails() {
     navigate(`/details/${data.id}`);
   };
@@ -44,12 +45,18 @@ export function Card({data, favorites, ...rest}) {
   };
   
   useEffect(() => {
-    if(favorites.id == data.id) {
-      setFavorited(true);
-    }else {
-      setFavorited(false);
+    async function fetchFavorite() {
+      const response = await api.get(`/dishes/${data.id}/favorites`);
+
+      if(response.data === true) {
+        setFavorited(true);
+      }else {
+        setFavorited(false);
+      };
     };
-  }, [favorited]);
+    fetchFavorite();
+
+  }, []);
 
   return(
     <Container {...rest} >
