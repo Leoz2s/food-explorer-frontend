@@ -36,16 +36,12 @@ export const Container = styled.header`
       max-width: 58.1rem;
     }
 
-    > button.desktop {
+    > button.red-button {
       display: flex;
       gap: .8rem;
 
       width: 21.6rem;
       border-radius: 5px;
-    }
-
-    > button.log-out-button {
-      width: fit-content;
     }
   }
 `;
@@ -82,7 +78,7 @@ export const Logo = styled.div`
 export const ReceiptWrapper = styled.div`
   position: relative;
     
-  > .itens-amount {
+  > .items-amount {
     position: absolute;
     bottom: 1.8rem;
     left: 1.8rem;

@@ -7,6 +7,7 @@ import { Container, Logo, ReceiptWrapper } from "./styles";
 import {SideMenu} from "../SideMenu";
 import {Input} from "../Input";
 import {Button} from "../Button";
+import {ButtonText} from "../ButtonText";
 
 import MenuIcon from "../../assets/icons/Menu.svg";
 import logo from "../../assets/icons/Polygon.svg";
@@ -22,6 +23,15 @@ export function Header({onSearch, ...rest}) {
 
   function handleRedirectToHome() {
     navigate("/");
+  };
+  function handleRedirectToFavorites() {
+    navigate("/favorites");
+  };
+  function handleRedirectToOrderHistory() {
+    navigate("/orders");
+  };  
+  function handleRedirectToCheckOut() {
+    navigate("/check-out");
   };
   function handleRedirectToNewDish() {
     navigate("/new-dish");
@@ -60,8 +70,10 @@ export function Header({onSearch, ...rest}) {
 
       { isAdmin === false &&
         <button>
-          <ReceiptWrapper className="mobile">
-            <div className="itens-amount">0</div>
+          <ReceiptWrapper className="mobile" 
+            onClick={handleRedirectToCheckOut}
+          >
+            <div className="items-amount">0</div>
             <img src={ReceiptIcon} alt="Receipt icon" />
           </ReceiptWrapper>
         </button>
@@ -71,11 +83,25 @@ export function Header({onSearch, ...rest}) {
         placeholder="Busque por pratos ou ingredientes"
         onChange={e => onSearch(e.target.value)}
       />
-      <Button className="desktop" 
+
+      { isAdmin === false &&
+        <ButtonText className="desktop" 
+          text="Meus favoritos" 
+          onClick={handleRedirectToFavorites} 
+        />
+      }
+      
+      <ButtonText className="desktop" 
+        text="Histórico de pedidos" 
+        onClick={handleRedirectToOrderHistory} 
+      />
+      
+      <Button className="desktop red-button" 
         Icon={isAdmin ? "" : ReceiptIcon} 
         text={isAdmin ? "Novo prato" : `Pedidos (0)`}  
-        onClick={isAdmin ? handleRedirectToNewDish : () => {}}  
+        onClick={isAdmin ? handleRedirectToNewDish : handleRedirectToCheckOut}  
       />
+
       <button className="desktop log-out-button">
         <img  
           src={SignOutIcon} alt="Logout" 

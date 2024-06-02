@@ -18,7 +18,12 @@ export function SideMenu({menuIsOpen, onCloseMenu, onSearch}) {
   function handleRedirectToNewDish() {
     navigate("/new-dish");
   };
-
+  function handleRedirectToFavorites() {
+    navigate("/favorites");
+  };
+  function handleRedirectToOrderHistory() {
+    navigate("/orders");
+  };
   function handleSignOut() {
     navigate("/");
     signOut();
@@ -49,6 +54,17 @@ export function SideMenu({menuIsOpen, onCloseMenu, onSearch}) {
               <p onClick={handleRedirectToNewDish} >Novo prato</p>
             </button>
           }
+
+          { isAdmin === false &&
+            <button>
+              <p onClick={handleRedirectToFavorites}>Meus favoritos</p>
+            </button>
+          }
+
+          <button>
+            <p onClick={handleRedirectToOrderHistory}>Histórico de pedidos</p>
+          </button>
+
           <button>
             <p onClick={handleSignOut}>Sair</p>
           </button>

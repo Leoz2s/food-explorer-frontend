@@ -4,13 +4,13 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 export const Container = styled.div`
   width: 100%;
 
-  height: 100vh;
   display: grid;
   grid-template-areas:
     "Header"
     "Main"
     "Footer";
   grid-template-rows: 11.4rem auto 7.7rem;
+  height: 100vh;
 `;
 
 export const Banner = styled.div`

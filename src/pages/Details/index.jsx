@@ -26,7 +26,7 @@ export function Details() {
   const isAdmin = (user.role === "admin");
   
   function handleReturn() {
-    navigate("/");
+    navigate(-1);
   };
   function handleRedirectToEdit() {
     navigate(`/edit-dish/${data.id}`);

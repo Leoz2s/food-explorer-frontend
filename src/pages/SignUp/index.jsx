@@ -28,7 +28,6 @@ export function SignUp() {
       .then(() => {
         alert("Usuário criado com sucesso!");
         navigate("/");
-        console.log("hi")
       })
       .catch(error => {
         if(error.response) {

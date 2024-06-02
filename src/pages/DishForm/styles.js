@@ -4,9 +4,9 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 
-  "Header"
-  "Main"
-  "Footer";
+    "Header"
+    "Main"
+    "Footer";
   grid-template-rows: 11.4rem auto 7.7rem;
   height: 100vh;
 `;
@@ -23,8 +23,8 @@ export const Main = styled.main`
   font-weight: 500;
   color: ${({theme}) => theme.LIGHT.LIGHT_300};
 
-  animation: disapper_appear .5s ease-in-out;
-  @keyframes disapper_appear {
+  animation: disappear_appear .5s ease-in-out;
+  @keyframes disappear_appear {
     0% {
       opacity: 0;
     }
