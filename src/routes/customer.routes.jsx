@@ -13,7 +13,7 @@ export function CustomerRoutes() {
       <Route path="/details/:id" element={<Details />} />
       <Route path="/favorites" element={<Favorites />} />
       <Route path="/orders" element={<OrderHistory />} />
-      <Route path="/check-out" element={<OrderHistory />} />
+      <Route path="/check-out" element={<CheckOut />} />
 
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
