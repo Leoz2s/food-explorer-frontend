@@ -14,6 +14,8 @@ function AuthProvider({children}) {
       localStorage.setItem("@food-explorer:user", JSON.stringify(user));
       setData({user});
 
+      localStorage.setItem("@food-explorer:cart", JSON.stringify([]));
+
     }catch(error){
       if(error.response) {
         alert(error.response.data.message);
@@ -26,6 +28,21 @@ function AuthProvider({children}) {
   function signOut() {
     localStorage.removeItem("@food-explorer:user");
     setData({});
+
+    localStorage.removeItem("@food-explorer:cart");
+  };
+
+  function addToCart(item) {
+    const storedItems = localStorage.getItem("@food-explorer:cart");
+    const previousItems = JSON.parse(storedItems);
+    const allItems = [...previousItems, item];
+    localStorage.setItem("@food-explorer:cart", JSON.stringify(allItems));
+  };
+  function removeFromCart(itemToRemove) {
+    const storedItems = localStorage.getItem("@food-explorer:cart");
+    const previousItems = JSON.parse(storedItems);
+    const allItems = previousItems.filter(item => (item[1].id != itemToRemove[1].id));
+    localStorage.setItem("@food-explorer:cart", JSON.stringify(allItems));
   };
 
   useEffect(() => {
@@ -40,7 +57,9 @@ function AuthProvider({children}) {
     <AuthContext.Provider value={{
         signIn, 
         user: data.user,
-        signOut
+        signOut,
+        addToCart,
+        removeFromCart
       }}>
       
       {children}

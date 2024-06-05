@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
 
 export const Container = styled.div`
   display: grid;
@@ -30,18 +31,16 @@ export const Container = styled.div`
     gap: 2.4rem;
 
     img {
-      width: 96px;
-      height: 96px;
+      width: 9.6rem;
+      height: 9.6rem;
     }
     
     span {
       color: ${({theme}) => theme.LIGHT.LIGHT_400};
       text-align: center;
 
-      /* Roboto/Big bold */
       font-family: Roboto;
-      font-size: 20px;
-      font-style: normal;
+      font-size: 2rem;
       font-weight: 700;
       line-height: 160%; /* 32px */
     }
@@ -49,6 +48,11 @@ export const Container = styled.div`
 
   .hide {
     display: none;
+  }
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    --table-width: 53rem;
+    height: 47rem;
   }
 `;
 
@@ -142,5 +146,14 @@ export const CreditCardForm = styled.form`
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 2.4rem; /* 171.429% */
+  }
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    > div input, > button {
+      width: 34.8rem;
+    }
+    > .validity-CVC input {
+      width: 16.6rem;
+    }
   }
 `;

@@ -17,7 +17,7 @@ import {Footer} from "../../components/Footer";
 export function Details() {
   const navigate = useNavigate();
   const params = useParams();
-  const {user} = useAuth();
+  const {user, addToCart} = useAuth();
   
   const [data, setData] = useState({});
   const [amount, setAmount] = useState({});
@@ -30,10 +30,6 @@ export function Details() {
   };
   function handleRedirectToEdit() {
     navigate(`/edit-dish/${data.id}`);
-  };
-
-  function addDish() {
-    console.log(`${amount} unidades de ${data.name} foram adicionadas!`)
   };
   
   useEffect(() => {
@@ -78,13 +74,13 @@ export function Details() {
                 <Button className="mobile"
                   Icon={ReceiptIcon}
                   text={`pedir ∙ ${data.price}`}
-                  onClick={addDish} 
+                  onClick={() => addToCart([amount, data])} 
                 />
               }
               { isAdmin === false && 
                 <Button className="desktop" 
                   text={`incluir ∙ ${data.price}`}
-                  onClick={addDish}
+                  onClick={() => addToCart([amount, data])}
                 />
               }
               { isAdmin === true &&

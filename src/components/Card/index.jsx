@@ -15,12 +15,12 @@ import caretRightIcon from "../../assets/icons/CaretRight.svg"
 
 export function Card({data, ...rest}) {
   const navigate = useNavigate();
-  const {user} = useAuth();
+  const {user, addToCart} = useAuth();
   const image = `${api.defaults.baseURL}/files/${data.image}`;
 
   const isAdmin = [USER_ROLE.ADMIN,].includes(user.role);
   
-  const [amountValue, setAmountValue] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [favorited, setFavorited] = useState(false);
   
   async function addToFavorites() {
@@ -38,10 +38,6 @@ export function Card({data, ...rest}) {
   
   function redirectToEditDish() {
     navigate(`/edit-dish/${data.id}`);
-  };  
-  
-  function addDish() {
-    console.log(`${amountValue} unidades de ${data.name} foram adicionadas!`)
   };
   
   useEffect(() => {
@@ -91,10 +87,10 @@ export function Card({data, ...rest}) {
 
       <div className="stepper-button">
         { isAdmin == false &&
-          <NumericStepper amountvalue={setAmountValue} />
+          <NumericStepper amountvalue={setAmount} />
         }
         { isAdmin == false &&
-          <Button text="Incluir" onClick={addDish} />
+          <Button text="Incluir" onClick={() => addToCart([amount, data])} />
         }
       </div>
     </Container>

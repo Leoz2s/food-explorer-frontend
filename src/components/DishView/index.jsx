@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import { useAuth } from "../../hooks/auth";
 
 import { Container } from "./styles";
 
-export function DishView({data, updateFavorites, ...rest}) {
+export function DishView({data, pathname, quantity, updateFavorites, ...rest}) {
   const navigate = useNavigate();
+  const {removeFromCart} = useAuth();
   const image = `${api.defaults.baseURL}/files/${data.image}`;
 
   function redirectToDishDetails() {
@@ -17,15 +19,19 @@ export function DishView({data, updateFavorites, ...rest}) {
   };
 
   return(
-    <Container {...rest} >
+    <Container className={ pathname === "/check-out" ? `order-item` : ""} {...rest} >
       <img src={image} alt="Imagem do prato" />
       
       <div className="infos-action">
         <button className="dish-name"
-        onClick={redirectToDishDetails}>
-          {data.name}
+          onClick={redirectToDishDetails}
+        >
+          { pathname === "/check-out" ? `${quantity} x ${data.name}` : data.name}
+          { pathname === "/check-out" ? <span>{data.price}</span> : ""}
         </button>
-        <button onClick={removeFavorite}>Remover dos Favoritos</button>
+        <button onClick={ pathname === "/check-out" ? () => removeFromCart([quantity, data]) : removeFavorite }>
+          { pathname === "/check-out" ? "Excluir" : "Remover dos Favoritos" }
+        </button>
       </div>
     </Container>
   );

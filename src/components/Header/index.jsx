@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
 import {USER_ROLE} from "../../utils/roles";
@@ -18,6 +18,7 @@ export function Header({onSearch, ...rest}) {
   const navigate = useNavigate();
   const {user, signOut} = useAuth();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [itemsQuantity, setItemsQuantity] = useState(0);
 
   const isAdmin = [USER_ROLE.ADMIN,].includes(user.role);
 
@@ -41,6 +42,18 @@ export function Header({onSearch, ...rest}) {
     navigate("/");
     signOut();
   };
+
+  function countItemsInCart() {
+    const storedItems = localStorage.getItem("@food-explorer:cart");
+    const allItems = JSON.parse(storedItems);
+    let itemsCount = 0;
+    allItems.forEach(item => itemsCount = itemsCount + item[0]);
+    setItemsQuantity(itemsCount);
+  };
+
+  useEffect(() => {
+    countItemsInCart();
+  }, []);
 
   return(
     <Container {...rest} >
@@ -73,7 +86,7 @@ export function Header({onSearch, ...rest}) {
           <ReceiptWrapper className="mobile" 
             onClick={handleRedirectToCheckOut}
           >
-            <div className="items-amount">0</div>
+            <div className="items-amount">{itemsQuantity}</div>
             <img src={ReceiptIcon} alt="Receipt icon" />
           </ReceiptWrapper>
         </button>
@@ -98,7 +111,7 @@ export function Header({onSearch, ...rest}) {
       
       <Button className="desktop red-button" 
         Icon={isAdmin ? "" : ReceiptIcon} 
-        text={isAdmin ? "Novo prato" : `Pedidos (0)`}  
+        text={isAdmin ? "Novo prato" : `Pedidos (${itemsQuantity})`}  
         onClick={isAdmin ? handleRedirectToNewDish : handleRedirectToCheckOut}  
       />
 

@@ -52,24 +52,34 @@ export function DishForm() {
       return alert("Um novo ingrediente foi deixado no campo de novos ingredientes. Adicione o novo ingrediente ou esvazie o campo.");
     };
     
-    const response = await api.post("/dishes", {name, category, ingredients, price, description});
-    
-    if(image) {
-      const {dish_id} = response.data;
-
-      const fileUploadForm = new FormData();
-      fileUploadForm.append("image", image);
+    try {
+      const response = await api.post("/dishes", {name, category, ingredients, price, description});
       
-      await api.patch(`/dishes/${dish_id}/image`, fileUploadForm);
-    };
-    
-    alert("Prato criado com sucesso!");
-    navigate("/");
+      if(image) {
+        const {dish_id} = response.data;
+  
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("image", image);
+        
+        await api.patch(`/dishes/${dish_id}/image`, fileUploadForm);
+      };
+      
+      alert("Prato criado com sucesso!");
+      navigate("/");
+
+    }catch(error) {
+      if(error.response) {
+        console.log(error.response)
+        alert(error.response.data.message);
+      }else {
+        alert("A criação do item não foi possível.");
+      };
+    }
   };
   
   function handleDeleteDish() {
-    const confrim = window.confirm("Você quer mesmo deletar este consumível?");
-    if(confrim) {
+    const confirm = window.confirm("Você quer mesmo deletar este consumível?");
+    if(confirm) {
       api.delete(`/dishes/${params.id}`);
       navigate("/");
     };
@@ -119,11 +129,11 @@ export function DishForm() {
   
   function handleFormatPrice(value) {
     if(value > 0) {
-      let formatedPrice = String("R$ " + value).replace('.', ',');
-      if(formatedPrice.includes(',')){
-        setPrice(formatedPrice);
+      let formattedPrice = String("R$ " + value).replace('.', ',');
+      if(formattedPrice.includes(',')){
+        setPrice(formattedPrice);
       }else {
-        setPrice(formatedPrice += ",00");
+        setPrice(formattedPrice += ",00");
       };
     };
   };

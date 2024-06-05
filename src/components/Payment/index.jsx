@@ -15,41 +15,61 @@ export function Payment({...rest}) {
   const methods = ["PIX", "CreditCard"];
   const steps = ["Payment-Method", "Waiting-Payment", "Payment-Approved", "Preparing-Order"];
 
-  const [paymentMethod, setPaymentMethod] = useState("CreditCard");
+  const [paymentMethod, setPaymentMethod] = useState("PIX");
   const [paymentStep, setPaymentStep] = useState("Payment-Method");
 
   function changePaymentMethod(method) {
-    switch (method) {
-      case "PIX":
-        setPaymentMethod("PIX");
-        break;
-      case "CreditCard":
-        setPaymentMethod("CreditCard");
-        break;
-      default:
-        setPaymentMethod(methods[0]);
-        break;
+    if(paymentStep === "Payment-Method") {
+      switch (method) {
+        case "PIX":
+          setPaymentMethod("PIX");
+          break;
+        case "CreditCard":
+          setPaymentMethod("CreditCard");
+          break;
+        default:
+          setPaymentMethod(methods[0]);
+          break;
+      };
     };
   };
 
-  function changePaymentSteps(step) {
-    switch (step) {
-      case "Payment-Method":
-        setPaymentStep("Payment-Method");
-        break;
-      case "Waiting-Payment":
-        setPaymentStep("Waiting-Payment");
-        break;
-      case "Payment-Approved":
-        setPaymentStep("Payment-Approved");
-        break;
-      case "Preparing-Order":
-        setPaymentStep("Preparing-Order");
-        break;
-      default:
-        setPaymentStep(steps[0]);
-        break;
-    };
+  function changePaymentSteps() {
+    let step = "Payment-Method";
+
+    let countdownTimeInSeconds = 20;
+    const timer = setInterval(() => {
+      countdownTimeInSeconds--
+
+      if(countdownTimeInSeconds <= 0) {
+        clearInterval(timer);
+      }else if(countdownTimeInSeconds <= 5) {
+        step = steps[3]
+      }else if(countdownTimeInSeconds <= 10) {
+        step = steps[2]
+      }else if(countdownTimeInSeconds <= 19) {
+        step = steps[1]
+      };
+
+      switch (step) {
+        case steps[0]:
+          setPaymentStep("Payment-Method");
+          break;
+        case steps[1]:
+          setPaymentStep("Waiting-Payment");
+          break;
+        case steps[2]:
+          setPaymentStep("Payment-Approved");
+          break;
+        case steps[3]:
+          setPaymentStep("Preparing-Order");
+          break;
+        default:
+          setPaymentStep(steps[0]);
+          break;
+      };
+    }, 1000);
+
   };
 
   return(
@@ -90,7 +110,9 @@ export function Payment({...rest}) {
           </div>
         </div>
 
-        <Button type="button" text="Finalizar pagamento" />
+        <Button type="button" text="Finalizar pagamento"
+          onClick={changePaymentSteps}
+        />
       </CreditCardForm>
 
       <div className={`payment-process ${paymentStep === "Waiting-Payment" ? '' : 'hide'}`}>
