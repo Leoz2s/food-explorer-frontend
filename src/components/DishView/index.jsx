@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/auth";
 
 import { Container } from "./styles";
 
-export function DishView({data, pathname, quantity, updateFavorites, ...rest}) {
+export function DishView({data, pathname, quantity, updateFavorites, cartChanged, ...rest}) {
   const navigate = useNavigate();
   const {removeFromCart} = useAuth();
   const image = `${api.defaults.baseURL}/files/${data.image}`;
@@ -16,6 +16,13 @@ export function DishView({data, pathname, quantity, updateFavorites, ...rest}) {
   async function removeFavorite() {
     await api.delete(`/dishes/${data.id}/favorites`);
     updateFavorites(data.id);
+  };
+  function handleRemoveFromCart(removeData) {
+    removeFromCart(removeData);
+
+    const cartValue = cartChanged[0];
+    const cartChangedFunction = cartChanged[1];
+    cartChangedFunction(cartValue + 1);
   };
 
   return(
@@ -29,7 +36,7 @@ export function DishView({data, pathname, quantity, updateFavorites, ...rest}) {
           { pathname === "/check-out" ? `${quantity} x ${data.name}` : data.name}
           { pathname === "/check-out" ? <span>{data.price}</span> : ""}
         </button>
-        <button onClick={ pathname === "/check-out" ? () => removeFromCart([quantity, data]) : removeFavorite }>
+        <button onClick={ pathname === "/check-out" ? () => handleRemoveFromCart([quantity, data]) : removeFavorite }>
           { pathname === "/check-out" ? "Excluir" : "Remover dos Favoritos" }
         </button>
       </div>

@@ -6,7 +6,7 @@ export const Container = styled.div`
   gap: 1.6rem;
   flex-shrink: 0;
 
-  padding: .8rem 2rem;
+  padding: 2rem 2rem;
   width: 34.8rem;
   min-height: 11.4rem;
 
@@ -28,6 +28,16 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       gap: .8rem;
+    }
+  }
+
+  > .select {
+
+    .select-button {
+    width: 100%;
+    }
+    .options-list {
+      width: 100%;
     }
   }
 `;

@@ -5,13 +5,12 @@ import { api } from "../../services/api";
 import CaretLeftIcon from "../../assets/icons/CaretLeft.svg";
 import UploadIcon from "../../assets/icons/UploadSimple.svg";
 import DeleteIcon from "../../assets/icons/Close.svg";
-import ChevronDownIcon from "../../assets/icons/chevron-down.svg";
-import ChevronUpIcon from "../../assets/icons/chevron-up.svg";
 
-import {Container, Main, Form, Image_Name_Category_Inputs, Ingredients_Price_Inputs, Label, Select, Textarea} from "./styles";
+import {Container, Main, Form, Image_Name_Category_Inputs, Ingredients_Price_Inputs, Label, Textarea} from "./styles";
 import {Header} from "../../components/Header";
 import {ButtonText} from "../../components/ButtonText";
 import {Input} from "../../components/Input";
+import {Select} from "../../components/Select";
 import {Tag} from "../../components/Tag";
 import {Button} from "../../components/Button";
 import {Footer} from "../../components/Footer";
@@ -175,7 +174,7 @@ export function DishForm() {
             <div className="input-wrap image-input">
               <p>Imagem do prato</p>
 
-              <Label htmlFor="upload" ><img src={UploadIcon}/>{"Selecione imagem"}</Label>
+              <Label htmlFor="upload" ><img src={UploadIcon}/>{"Selecione a imagem"}</Label>
               <Input type="file" id="upload" onChange={handleNewImage} />
             </div>
 
@@ -191,55 +190,9 @@ export function DishForm() {
             <div className="input-wrap category-input">
               <p>Categoria</p>
 
-              <Select>
-                <div id="category-select">
-                  <input type="checkbox" id="options-view-button" />
-
-                  <div id="select-button">
-                    <div id="selected-value">{category}</div>
-
-                    <div id="chevrons">
-                      <img src={ChevronDownIcon}/>
-                      <img src={ChevronUpIcon}/>
-                    </div>
-                  </div>
-                </div>
-
-                <ul id="options">
-                  <li className="option">
-                    <input
-                      type="radio"
-                      name="category"
-                      value="meal"
-                      data-label="Refeição"
-                      onClick={e => setCategory(e.target.dataset.label)}
-                    />
-                    <span>Refeição</span>
-                  </li>
-
-                  <li className="option">
-                    <input
-                      type="radio"
-                      name="category"
-                      value="dessert"
-                      data-label="Sobremesa"
-                      onClick={e => setCategory(e.target.dataset.label)}
-                    />
-                    <span>Sobremesa</span>
-                  </li>
-
-                  <li className="option">
-                    <input
-                      type="radio"
-                      name="category"
-                      value="drink"
-                      data-label="Bebida"
-                      onClick={e => setCategory(e.target.dataset.label)}
-                    />
-                    <span>Bebida</span>
-                  </li>
-                </ul>
-              </Select>
+              <Select id="select" onSelect={setCategory}
+                CurrentOption={category} OptionsToSelect={["Refeição", "Sobremesa", "Bebida"]} 
+              />
             </div>
           </Image_Name_Category_Inputs>
 

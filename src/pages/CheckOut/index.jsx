@@ -16,6 +16,7 @@ export function CheckOut() {
   const [items, setItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState([]);
   const [mobileInitialStep, setMobileInitialStep] = useState(true);
+  const [cartChanged, setCartChanged] = useState(0);
 
   const [LG_DEVICE, ] = DEVICE_BREAKPOINTS.LG.split("px");
 
@@ -41,7 +42,7 @@ export function CheckOut() {
     setItems(allItems);
 
     countTotalPrice();
-  }, [totalPrice]);
+  }, [totalPrice, cartChanged]);
 
   return(
     <Container>
@@ -58,6 +59,7 @@ export function CheckOut() {
               data={item[1]}
               pathname={location.pathname}
               quantity={item[0]}
+              cartChanged={[cartChanged, setCartChanged]}
             />))
           }
 

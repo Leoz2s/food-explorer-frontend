@@ -90,25 +90,25 @@ export const Form = styled.form `
     button:hover {
       opacity: 1;
     }
-
+      
     button#delete-button {
       background-color: ${({theme}) => theme.DARK.DARK_800};
     }
   }
-  
-
+      
+      
   > label, select, textarea {
     border: none;    
-
+    
     &:placeholder-shown {
       color: ${({theme}) => theme.LIGHT.LIGHT_500};
     }
   }
-
+    
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     > #buttons-group {
       justify-content: flex-end;
-
+      
       button {
         width: auto;
       }
@@ -119,48 +119,98 @@ export const Form = styled.form `
 export const Image_Name_Category_Inputs = styled.div`
   display: grid;
   gap: 2.4rem;
-
+  
   > .image-input input {
     display: none;
-  }
-
-  > .name-input {
-    input {
-      width: 100%;
-      background-color: ${({theme}) => theme.DARK.DARK_800};
     }
-  }
-
-  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 3.2rem;
-
-    > .image-input {
-      min-width: 22.9rem;
-    }
+    
     > .name-input {
-      min-width: 46.3rem;
-      width: 100%;
+      input {
+        width: 100%;
+        background-color: ${({theme}) => theme.DARK.DARK_800};
+      }
     }
-    > .category-input {
-      min-width: 36.4rem;
-      width: 100%;
+    
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 3.2rem;
+      
+      --form-width: 90rem; // 105.6rem
+      
+      > .image-input {
+        min-width: calc(0.2169 * var(--form-width)) ; // 22,9rem
+      }
+      > .name-input {
+        min-width: calc(0.4384 * var(--form-width)); // 46,3rem
+        width: 100%;
+      }
+      > .category-input {
+        min-width: calc(0.3447 * var(--form-width)); // 36.4rem
+        width: 100%;
+      }
+    }
+  
+  > div #select {
+    --select-width: 100%;
+    
+    .select-button {
+      background-color: ${({theme}) => theme.DARK.DARK_800};
+      
+      width: var(--select-width);
+      border-radius: 5px;
+    }
+      
+    .options-view-button:focus + .select-button,
+    .options-view-button:checked + .selected-button {
+        outline: 1px solid ${({theme}) => theme.LIGHT.LIGHT_100};
+    }
+    .options-list {
+          width: var(--select-width);
+    }
+    
+    .option {
+      border-bottom: 1px solid ${({theme}) => theme.DARK.DARK_200};
+    }
+    .option:has(input:checked),
+    .option:hover {
+      border: 1px solid ${({theme}) => theme.LIGHT.LIGHT_800};
+      background-color: ${({theme}) => theme.DARK.DARK_900};
+    }
+    .option:has(input:focus) {
+      outline: 1px solid ${({theme}) => theme.LIGHT.LIGHT_800};
     }
   }
+`;
+
+export const Label = styled.label`
+  background-color: ${({theme}) => theme.DARK.DARK_800};  
+  padding: 1.2rem 3.2rem;
+  height: 4.8rem;
+  border-radius: 8px;
+  
+  font-family: Poppins, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: ${({theme}) => theme.LIGHT.LIGHT_100};
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: .8rem;
 `;
 
 export const Ingredients_Price_Inputs = styled.div`
   display: grid;
   gap: 2.4rem;
-
+  
   > .ingredients-input .ingredients-group {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 1.6rem;
-
+    
     padding: .4rem .8rem;
     background-color: ${({theme}) => theme.DARK.DARK_800};
     border-radius: 8px;
@@ -205,137 +255,6 @@ export const Ingredients_Price_Inputs = styled.div`
       min-width: 25.1rem;
       width: 100%;
     }
-  }
-`;
-
-export const Label = styled.label`
-  background-color: ${({theme}) => theme.DARK.DARK_800};  
-  padding: 1.2rem 3.2rem;
-  height: 4.8rem;
-  border-radius: 8px;
-  
-  font-family: Poppins, sans-serif;
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: ${({theme}) => theme.LIGHT.LIGHT_100};
-
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-`;
-
-export const Select = styled.div`
-  font-family: Roboto, sans-serif;
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: ${({theme}) => theme.LIGHT.LIGHT_400};
-
-  #select-button {
-    background-color: ${({theme}) => theme.DARK.DARK_900};  
-    padding: 1.6rem;
-    height: 4.8rem;
-    border-radius: 8px;
-
-    display: flex;
-    padding: 0.75rem;
-    align-items: center;
-    justify-content: space-between;
-
-    border-radius: 0.375rem;
-    background-color: ${({theme}) => theme.DARK.DARK_800};
-  }
-
-  #chevrons img {
-    width: 2rem;
-    height: 2rem;
-    color: ${({theme}) => theme.LIGHT.LIGHT_100};
-  }
-
-  #chevrons [src="/src/assets/icons/chevron-up.svg"] {
-    display: none;
-  }
-  #options-view-button:focus + #select-button,
-  #options-view-button:checked + #selected-button {
-    outline: 1px solid ${({theme}) => theme.LIGHT.LIGHT_100};
-  }
-
-  #category-select:has(#options-view-button:checked) label,
-  #options-view-button:checked + #select-button #chevrons {
-    color: 1px solid ${({theme}) => theme.TINTS.CAKE_200};
-  }
-
-  #options-view-button:checked + #select-button #chevrons 
-  [src="/src/assets/icons/chevron-down.svg"] {
-    display: none;
-  }
-  #options-view-button:checked + #select-button #chevrons 
-  [src="/src/assets/icons/chevron-up.svg"] {
-    display: block;
-  }
-
-  #category-select {
-    position: relative;
-  }
-
-  #options-view-button {
-    all: unset;
-
-    position: absolute;
-    inset: 0;
-
-    cursor: pointer;
-    z-index: 3;
-  }
-
-  #options {
-    margin-top: .25rem;
-
-    border-radius: .375rem;
-    border: 1px solid #252529;
-    background: ${({theme}) => theme.DARK.DARK_200};
-
-    display: none;
-  }
-
-  .option {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-
-    padding: .75rem;
-    border-bottom: 1px solid #252529;
-
-    position: relative;
-  }
-
-  .option label {
-    color: #fbf9fe;
-  }
-
-  .option svg {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .option:has(input:checked),
-  .option:hover {
-    border-bottom: 1px solid #252529;
-    background-color: ${({theme}) => theme.DARK.DARK_800};
-  }
-
-  .option:has(input:focus) {
-    outline: 1px solid ${({theme}) => theme.TINTS.CAKE_200};
-  }
-
-  #category-select:has(#options-view-button:checked) + #options {
-    display: block;
-  }
-
-  .select:has(.option input:checked) #category-select label {
-    color: ${({theme}) => theme.TINTS.CAKE_200};
-  }
-  .select:has(.option input:checked) #selected-value {
-    color: ${({theme}) => theme.LIGHT.LIGHT_100};
   }
 `;
 

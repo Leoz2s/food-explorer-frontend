@@ -58,8 +58,7 @@ function AuthProvider({children}) {
         signIn, 
         user: data.user,
         signOut,
-        addToCart,
-        removeFromCart
+        addToCart, removeFromCart,
       }}>
       
       {children}

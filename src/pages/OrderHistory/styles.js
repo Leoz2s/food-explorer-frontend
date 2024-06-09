@@ -9,6 +9,11 @@ export const Container = styled.div`
     "Footer";
   grid-template-rows: 11.4rem auto 7.7rem;
   height: 100vh;
+
+  --status-width: 22.3rem;
+  --code-width: 15.1rem;
+  --details-width: 42.8rem;
+  --date-width: 15.1rem;
 `;
 
 export const Main = styled.main`
@@ -31,7 +36,7 @@ export const Main = styled.main`
 
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     padding-top: 3.4rem;
-    padding-left: 12.3rem;
+    padding-left: 7rem;
   }
 `;
 
@@ -57,7 +62,7 @@ export const Table = styled.div`
   align-items: center;
   justify-content: center;
   
-  width: 88rem;
+  width: calc(var(--status-width) var(--code-width) var(--details-width) var(--date-width));
 
   border: 2px solid ${({theme}) => theme.DARK.DARK_1000};
   border-radius: 8px;
@@ -80,7 +85,7 @@ export const TableRow = styled.div`
   display: grid;
   grid-template-areas:
     "status code details date";
-  grid-template-columns: 15.1rem 15.1rem 42.8rem 15.1rem;
+  grid-template-columns: var(--status-width) var(--code-width) var(--details-width) var(--date-width);
 
   flex-direction: column;
   justify-content: center;
