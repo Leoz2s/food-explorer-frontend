@@ -14,9 +14,8 @@ export function CheckOut() {
   const location = useLocation();
 
   const [items, setItems] = useState([]);
-  const [totalPrice, setTotalPrice] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [mobileInitialStep, setMobileInitialStep] = useState(true);
-  const [cartChanged, setCartChanged] = useState(0);
 
   const [LG_DEVICE, ] = DEVICE_BREAKPOINTS.LG.split("px");
 
@@ -28,6 +27,7 @@ export function CheckOut() {
       const itemPriceNumber = Number(itemPriceString);
       totalPrice = totalPrice + itemPriceNumber;
     });
+
     totalPrice = `R$ ${totalPrice.toFixed(2)}`.replace(".", ",");
     return setTotalPrice(totalPrice);
   };
@@ -42,7 +42,7 @@ export function CheckOut() {
     setItems(allItems);
 
     countTotalPrice();
-  }, [totalPrice, cartChanged]);
+  }, [totalPrice]);
 
   return(
     <Container>
@@ -59,7 +59,7 @@ export function CheckOut() {
               data={item[1]}
               pathname={location.pathname}
               quantity={item[0]}
-              cartChanged={[cartChanged, setCartChanged]}
+              cartChanged={[totalPrice, setTotalPrice]}
             />))
           }
 

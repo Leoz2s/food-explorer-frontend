@@ -20,9 +20,15 @@ export function DishView({data, pathname, quantity, updateFavorites, cartChanged
   function handleRemoveFromCart(removeData) {
     removeFromCart(removeData);
 
-    const cartValue = cartChanged[0];
+    let [, priceNumber] = data.price.split("R$ ");
+    priceNumber = Number(priceNumber.replace(",", "."));
+
+    let cartValue = cartChanged[0];
+    [, cartValue] = cartValue.split("R$ ");
+    cartValue = Number(cartValue.replace(",", ".")).toFixed(2);
     const cartChangedFunction = cartChanged[1];
-    cartChangedFunction(cartValue + 1);
+
+    cartChangedFunction(`R$ ${(cartValue - priceNumber).toFixed(2).replace(".", ",")}`);
   };
 
   return(
