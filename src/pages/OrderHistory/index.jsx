@@ -27,37 +27,66 @@ export function OrderHistory() {
     };
   };
 
-  function handleUpdateStatus(option) {
-    console.log(option);
+  function translateStatus(status) {
+    switch (status) {
+      case "pending":
+        return "Pendente";
+      case "preparing":
+        return "Preparando"
+      case "delivered":
+        return "Entregue";
+      default:
+        return "Pendente";
+    };
+  };
+  function formatCode(code) {
+
+  };
+  function formatDate(date) {
+    
+  };
+
+  async function handleUpdateStatus(order_id, status) {
+    try {
+      await api.patch(`/orders/${order_id}`, {status});
+    } catch (error) {
+      console.error(error.message);
+    };
   };
 
   useEffect(() => {
-    setOrdersData([
-      {
-        code: "000004",
-        status: "Pendente",
-        details: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
-        date: "20/05 às 18h00",
-      },
-      {
-        code: "000003",
-        status: "Preparando",
-        details: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
-        date: "20/05 às 18h00",
-      },
-      {
-        code: "000002",
-        status: "Entregue",
-        details: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
-        date: "20/05 às 18h00",
-      },
-      {
-        code: "000001",
-        status: "Entregue",
-        details: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
-        date: "20/05 às 18h00",
-      },
-    ]);
+    async function fetchOrders() {
+      const orders = await api.get("/orders");
+      setOrdersData(orders.data);
+    };
+    fetchOrders();
+
+    // setOrdersData([
+    //   {
+    //     id: "000004",
+    //     status: "Pendente",
+    //     description: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
+    //     created_at: "20/05 às 18h00",
+    //   },
+    //   {
+    //     id: "000003",
+    //     status: "Preparando",
+    //     description: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
+    //     created_at: "20/05 às 18h00",
+    //   },
+    //   {
+    //     id: "000002",
+    //     status: "Entregue",
+    //     description: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
+    //     created_at: "20/05 às 18h00",
+    //   },
+    //   {
+    //     id: "000001",
+    //     status: "Entregue",
+    //     description: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
+    //     created_at: "20/05 às 18h00",
+    //   },
+    // ]);
 
   }, []);
   
@@ -95,19 +124,19 @@ export function OrderHistory() {
             { OrdersData && OrdersData.map((order, index) => (
                 <TableRow key={index} >
                   { isAdmin == false &&
-                    <TableCell>{ColoredCircle(order.status)}<p>{order.status}</p></TableCell>
+                    <TableCell>{ColoredCircle(translateStatus(order.status))}<p>{translateStatus(order.status)}</p></TableCell>
                     ||
                     isAdmin == true && 
                     <TableCell>
-                      <Select Circle={ColoredCircle} 
-                        CurrentOption={order.status} OptionsToSelect={["Pendente", "Preparando", "Entregue"]} 
+                      <Select Circle={ColoredCircle} Id={order.id}
+                        CurrentOption={() => translateStatus(order.status)} OptionsToSelect={["Pendente", "Preparando", "Entregue"]} 
                         onSelect={handleUpdateStatus}
                       /> 
                     </TableCell>
                   }
-                  <TableCell><p>{order.code}</p></TableCell>
-                  <TableCell><p>{order.details}</p></TableCell>
-                  <TableCell><p>{order.date}</p></TableCell>
+                  <TableCell><p>{order.id}</p></TableCell>
+                  <TableCell><p>{order.description}</p></TableCell>
+                  <TableCell><p>{order.created_at}</p></TableCell>
                 </TableRow>
               ))
             }

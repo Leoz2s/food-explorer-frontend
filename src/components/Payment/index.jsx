@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { api } from '../../services/api';
 
 import { Container, TableRow, TableCell, CreditCardForm } from './styles';
 import {Button} from "../Button";
@@ -11,7 +12,7 @@ import Clock from "../../assets/icons/Clock.svg";
 import CheckCircle from "../../assets/icons/CheckCircle.svg";
 import ForkKnife from "../../assets/icons/ForkKnife.svg";
 
-export function Payment({...rest}) {
+export function Payment({orderDescription, ...rest}) {
   const methods = ["PIX", "CreditCard"];
   const steps = ["Payment-Method", "Waiting-Payment", "Payment-Approved", "Preparing-Order"];
 
@@ -63,6 +64,7 @@ export function Payment({...rest}) {
           break;
         case steps[3]:
           setPaymentStep("Preparing-Order");
+          api.post("/orders", {description: orderDescription});
           break;
         default:
           setPaymentStep(steps[0]);

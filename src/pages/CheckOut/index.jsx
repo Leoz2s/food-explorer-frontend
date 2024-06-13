@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints';
-import { useAuth } from '../../hooks/auth';
 
 import { Container, Main } from './styles';
 import {Header} from "../../components/Header";
@@ -40,6 +39,9 @@ export function CheckOut() {
     const storedItems = localStorage.getItem("@food-explorer:cart");
     const allItems = JSON.parse(storedItems);
     setItems(allItems);
+
+    let orderDescription;
+    
 
     countTotalPrice();
   }, [totalPrice]);

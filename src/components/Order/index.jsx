@@ -27,7 +27,7 @@ export function Order({data, Circle, CurrentOption, OptionsToSelect, onSelect}) 
 
       { isAdmin == true &&
         <Select className="select" 
-          onSelect={onSelect} Circle={Circle}
+          onSelect={onSelect} Id={data.id} Circle={Circle}
           CurrentOption={CurrentOption} OptionsToSelect={OptionsToSelect} 
         /> 
       }
