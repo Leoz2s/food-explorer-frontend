@@ -190,7 +190,7 @@ export function DishForm() {
             <div className="input-wrap category-input">
               <p>Categoria</p>
 
-              <Select id="select" onSelect={setCategory}
+              <Select id="select" onSelect={setCategory} isConsumable
                 CurrentOption={category} OptionsToSelect={["Refeição", "Sobremesa", "Bebida"]} 
               />
             </div>

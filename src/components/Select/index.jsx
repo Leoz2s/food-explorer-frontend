@@ -6,7 +6,7 @@ import CheckCircle from "../../assets/icons/CheckCircle.svg";
 
 import { Container, CategorySelect, SelectButton, SelectedValue, Chevrons, OptionsList } from './styles';
 
-export function Select({Circle, Id, CurrentOption, OptionsToSelect, onSelect, ...rest}) {
+export function Select({Circle, Id, CurrentOption, OptionsToSelect, onSelect, isConsumable, ...rest}) {
   const [options, setOptions] = useState(["Opção 1", "Opção 2"]);
   const [optionSelected, setOptionSelected] = useState("Pendente");
   
@@ -16,7 +16,11 @@ export function Select({Circle, Id, CurrentOption, OptionsToSelect, onSelect, ..
     setOptionSelected(option);
     inputOptionsViewButtonRef.current.click();
 
-    onSelect && onSelect(Id, option);
+    if(isConsumable) {
+      onSelect && onSelect(option);
+    }else {
+      onSelect && onSelect(Id, option);
+    };
   };
   function toggleOptionsViewButton() {
     inputOptionsViewButtonRef.current.classList.toggle("open");
