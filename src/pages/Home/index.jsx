@@ -16,10 +16,10 @@ import desktop_message_image from "../../assets/images/desktop-message-image.png
 
 export function Home() {
   const [dishes, setDishes] = useState([]);
-  const [favorites, setFavorites] = useState([]);
   const [sliderPerPage, setSliderPerPage] = useState(2);
   const [sliderSize, setSliderSize] = useState("100%");
   const [search, setSearch] = useState("");
+  const [updateItemsQuantity, setUpdateItemsQuantity] = useState(0);
 
   const SplideConfig = {
     perPage: sliderPerPage,
@@ -60,7 +60,7 @@ export function Home() {
 
   return(
     <Container >
-      <Header onSearch={setSearch} />
+      <Header onSearch={setSearch} updateItemsQuantity={updateItemsQuantity} />
 
       <Main>
         <Banner>
@@ -80,7 +80,7 @@ export function Home() {
                 dishes.map((dish, index) => (
                   <SplideSlide key={index}>
                     { dish.category == "Refeição" &&
-                      <Card key={dish.id} data={dish} />
+                      <Card key={dish.id} data={dish} updateItemsQuantity={setUpdateItemsQuantity} />
                     }
                   </SplideSlide>
                 ))
@@ -106,7 +106,7 @@ export function Home() {
               dishes.map((dish, index) => (
                 <SplideSlide key={index}>
                     { dish.category == "Sobremesa" &&
-                      <Card key={dish.id} data={dish} />
+                      <Card key={dish.id} data={dish} updateItemsQuantity={setUpdateItemsQuantity} />
                     }
                 </SplideSlide>
               ))
@@ -132,7 +132,7 @@ export function Home() {
               dishes.map((dish, index) => (
                 <SplideSlide key={index}>
                   { dish.category == "Bebida" &&
-                    <Card key={dish.id} data={dish} />
+                    <Card key={dish.id} data={dish} updateItemsQuantity={setUpdateItemsQuantity} />
                   }
                 </SplideSlide>
               ))

@@ -21,6 +21,7 @@ export function Details() {
   
   const [data, setData] = useState({});
   const [amount, setAmount] = useState({});
+  const [updateItemsQuantity, setUpdateItemsQuantity] = useState(0);
 
   const image = `${api.defaults.baseURL}/files/${data.image}`;
   const isAdmin = (user.role === "admin");
@@ -43,7 +44,7 @@ export function Details() {
 
   return(
     <Container >
-      <Header />
+      <Header updateItemsQuantity={updateItemsQuantity} />
 
       <Main>
         <ButtonText Icon={CaretLeftIcon} text="voltar" onClick={handleReturn} />
@@ -74,13 +75,15 @@ export function Details() {
                 <Button className="mobile"
                   Icon={ReceiptIcon}
                   text={`pedir ∙ ${data.price}`}
-                  onClick={() => addToCart([amount, data])} 
+                  onClick={() => {addToCart([amount, data]) 
+                    setUpdateItemsQuantity(prevState => prevState + 1)}} 
                 />
               }
               { isAdmin === false && 
                 <Button className="desktop" 
                   text={`incluir ∙ ${data.price}`}
-                  onClick={() => addToCart([amount, data])}
+                  onClick={() => {addToCart([amount, data]) 
+                    setUpdateItemsQuantity(prevState => prevState + 1)}} 
                 />
               }
               { isAdmin === true &&

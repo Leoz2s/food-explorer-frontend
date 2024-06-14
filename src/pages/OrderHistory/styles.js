@@ -19,6 +19,7 @@ export const Container = styled.div`
 export const Main = styled.main`
   padding-top: 5.6rem;
   padding-left: 3.5rem;
+  padding-bottom: 2rem;
 
   display: grid;
   align-content: baseline;

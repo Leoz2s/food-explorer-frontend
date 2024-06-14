@@ -35,20 +35,33 @@ export function Payment({orderDescription, ...rest}) {
     };
   };
 
+  let orderCreated = false;
+  function createOrder() {
+    if(orderCreated === false) {
+      api.post("/orders", {description: orderDescription});
+      localStorage.setItem("@food-explorer:cart", JSON.stringify([]));
+      orderCreated = true;
+    };
+  };
+
   function changePaymentSteps() {
+    if(orderDescription == "") {
+      return alert("É necessário que algum item esteja no carrinho para fazer um pedido!");
+    };
+
     let step = "Payment-Method";
 
-    let countdownTimeInSeconds = 20;
+    let countdownTimeInSeconds = 10;
     const timer = setInterval(() => {
       countdownTimeInSeconds--
 
       if(countdownTimeInSeconds <= 0) {
         clearInterval(timer);
-      }else if(countdownTimeInSeconds <= 5) {
+      }else if(countdownTimeInSeconds <= 2) {
         step = steps[3]
-      }else if(countdownTimeInSeconds <= 10) {
+      }else if(countdownTimeInSeconds <= 6) {
         step = steps[2]
-      }else if(countdownTimeInSeconds <= 19) {
+      }else if(countdownTimeInSeconds <= 8) {
         step = steps[1]
       };
 
@@ -64,14 +77,13 @@ export function Payment({orderDescription, ...rest}) {
           break;
         case steps[3]:
           setPaymentStep("Preparing-Order");
-          api.post("/orders", {description: orderDescription});
+          createOrder();
           break;
         default:
           setPaymentStep(steps[0]);
           break;
       };
     }, 1000);
-
   };
 
   return(

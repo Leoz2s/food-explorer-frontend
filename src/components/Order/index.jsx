@@ -11,19 +11,19 @@ export function Order({data, Circle, CurrentOption, OptionsToSelect, onSelect}) 
   return(
     <Container>
       <div className="code-status-date">
-        <p>{data.code}</p>
+        <p>{data.id}</p>
 
         { isAdmin == false &&
           <div className='status'>
             {Circle}
-            <p>{data.status}</p>
+            <p>{CurrentOption}</p>
           </div>
         }
 
-        <p>{data.date}</p>
+        <p>{data.created_at}</p>
       </div>
 
-      <p>{data.details}</p>
+      <p>{data.description}</p>
 
       { isAdmin == true &&
         <Select className="select" 

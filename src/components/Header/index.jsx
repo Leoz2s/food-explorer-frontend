@@ -14,7 +14,7 @@ import logo from "../../assets/icons/Polygon.svg";
 import ReceiptIcon from "../../assets/icons/Receipt.svg";
 import SignOutIcon from "../../assets/icons/SignOut.svg";
 
-export function Header({onSearch, ...rest}) {
+export function Header({onSearch, updateItemsQuantity, ...rest}) {
   const navigate = useNavigate();
   const {user, signOut} = useAuth();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -53,7 +53,7 @@ export function Header({onSearch, ...rest}) {
 
   useEffect(() => {
     countItemsInCart();
-  }, []);
+  }, [updateItemsQuantity]);
 
   return(
     <Container {...rest} >

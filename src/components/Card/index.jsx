@@ -13,7 +13,7 @@ import filledFavoriteIcon from "../../assets/icons/HeartFilled.svg"
 import editIcon from "../../assets/icons/Pencil.svg"
 import caretRightIcon from "../../assets/icons/CaretRight.svg"
 
-export function Card({data, ...rest}) {
+export function Card({data, updateItemsQuantity, ...rest}) {
   const navigate = useNavigate();
   const {user, addToCart} = useAuth();
   const image = `${api.defaults.baseURL}/files/${data.image}`;
@@ -90,7 +90,8 @@ export function Card({data, ...rest}) {
           <NumericStepper amountvalue={setAmount} />
         }
         { isAdmin == false &&
-          <Button text="Incluir" onClick={() => addToCart([amount, data])} />
+          <Button text="Incluir" onClick={() => {addToCart([amount, data])
+            updateItemsQuantity(prevState => prevState + 1) }} />
         }
       </div>
     </Container>

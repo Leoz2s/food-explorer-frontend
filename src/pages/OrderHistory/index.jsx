@@ -39,11 +39,13 @@ export function OrderHistory() {
         return "Pendente";
     };
   };
-  function formatCode(code) {
-
-  };
   function formatDate(date) {
-    
+    const [dateNumbers, hoursNumbers] = date.split(" ");
+    const [year, month, day] = dateNumbers.split("-");
+    const [hours, minutes, seconds] = hoursNumbers.split(":");
+    const timeZoneHours = (Number(hours) - 3)
+
+    return `${day}/${month} às ${timeZoneHours}h${minutes}`;
   };
 
   async function handleUpdateStatus(order_id, status) {
@@ -56,8 +58,16 @@ export function OrderHistory() {
 
   useEffect(() => {
     async function fetchOrders() {
-      const orders = await api.get("/orders");
-      setOrdersData(orders.data);
+      let {data} = await api.get("/orders");
+
+      const newIds = data.map(order => `${order.id}`.padStart(6, "0"));
+      const newDates = data.map(order => formatDate(order.created_at));
+      data.forEach((order, index) => {
+        order.id = newIds[index];
+        order.created_at = newDates[index];
+      });
+
+      setOrdersData(data);
     };
     fetchOrders();
 
@@ -99,14 +109,15 @@ export function OrderHistory() {
         { window.innerWidth < 1000 && OrdersData && 
           isAdmin == false &&
           OrdersData.map((order, index) => (
-            <Order key={index} data={order} Circle={ColoredCircle(order.status)} />
+            <Order key={index} data={order} Circle={ColoredCircle(translateStatus(order.status))} 
+              CurrentOption={translateStatus(order.status)} />
           ))
           ||
           window.innerWidth < 1000 && OrdersData && 
           isAdmin == true &&
           OrdersData.map((order, index) => (
             <Order key={index} data={order} Circle={ColoredCircle} 
-              CurrentOption={order.status} OptionsToSelect={["Pendente", "Preparando", "Entregue"]} 
+              CurrentOption={translateStatus(order.status)} OptionsToSelect={["Pendente", "Preparando", "Entregue"]} 
               onSelect={handleUpdateStatus}
             />
           ))
@@ -129,7 +140,7 @@ export function OrderHistory() {
                     isAdmin == true && 
                     <TableCell>
                       <Select Circle={ColoredCircle} Id={order.id}
-                        CurrentOption={() => translateStatus(order.status)} OptionsToSelect={["Pendente", "Preparando", "Entregue"]} 
+                        CurrentOption={translateStatus(order.status)} OptionsToSelect={["Pendente", "Preparando", "Entregue"]} 
                         onSelect={handleUpdateStatus}
                       /> 
                     </TableCell>

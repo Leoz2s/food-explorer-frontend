@@ -15,6 +15,7 @@ export function CheckOut() {
   const [items, setItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [mobileInitialStep, setMobileInitialStep] = useState(true);
+  const [orderDescription, setOrderDescription] = useState("");
 
   const [LG_DEVICE, ] = DEVICE_BREAKPOINTS.LG.split("px");
 
@@ -40,15 +41,16 @@ export function CheckOut() {
     const allItems = JSON.parse(storedItems);
     setItems(allItems);
 
-    let orderDescription;
-    
+    let itemsOrderDescription = "";
+    allItems.forEach(item => itemsOrderDescription = `${itemsOrderDescription} ${item[0]} x ${item[1].name},`);
+    setOrderDescription(itemsOrderDescription.slice(0, -1));
 
     countTotalPrice();
   }, [totalPrice]);
 
   return(
     <Container>
-      <Header />
+      <Header updateItemsQuantity={totalPrice} />
 
       <Main>
         <div id="check-out-order"
@@ -75,7 +77,7 @@ export function CheckOut() {
         <div id="check-out-payment" className={window.innerWidth < LG_DEVICE && mobileInitialStep === true ? "hide" : ""}>
           <h2>Pagamento</h2>
 
-          <Payment />
+          <Payment orderDescription={orderDescription} />
         </div>
 
       </Main>
