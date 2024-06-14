@@ -33,7 +33,9 @@ export function DishView({data, pathname, quantity, updateFavorites, cartChanged
 
   return(
     <Container className={ pathname === "/check-out" ? `order-item` : ""} {...rest} >
-      <img src={image} alt="Imagem do prato" />
+      <div className="dish-mask item-image">
+        <img src={image} alt="Imagem do prato" className="item-image" />
+      </div>
       
       <div className="infos-action">
         <button className="dish-name"

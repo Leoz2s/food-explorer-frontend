@@ -32,7 +32,7 @@ export const Container = styled.div`
     cursor: pointer;
   }
 
-  > .dish-image {
+  .dish-image {
     --image-size: 8.8rem;
     height: var(--image-size);
     width: var(--image-size);
@@ -93,7 +93,7 @@ export const Container = styled.div`
       display: block;
     }
 
-    > .dish-image {
+    .dish-image {
       --image-size: 17.6rem;
     }
 

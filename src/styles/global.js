@@ -43,4 +43,9 @@ export default createGlobalStyle`
   button:hover {
     opacity: 0.75;
   }
+
+  .dish-mask {
+    border-radius: 50%;
+    overflow: hidden;
+  }
 `;

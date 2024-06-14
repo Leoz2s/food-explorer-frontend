@@ -8,10 +8,10 @@ import { Container } from "./styles";
 import {Button} from "../Button";
 import {NumericStepper} from "../NumericStepper";
 
-import favoriteIcon from "../../assets/icons/Heart.svg"
-import filledFavoriteIcon from "../../assets/icons/HeartFilled.svg"
-import editIcon from "../../assets/icons/Pencil.svg"
-import caretRightIcon from "../../assets/icons/CaretRight.svg"
+import favoriteIcon from "../../assets/icons/Heart.svg";
+import filledFavoriteIcon from "../../assets/icons/HeartFilled.svg";
+import editIcon from "../../assets/icons/Pencil.svg";
+import caretRightIcon from "../../assets/icons/CaretRight.svg";
 
 export function Card({data, updateItemsQuantity, ...rest}) {
   const navigate = useNavigate();
@@ -73,7 +73,9 @@ export function Card({data, updateItemsQuantity, ...rest}) {
         </button>
       }
 
-      <img src={image} alt="Foto do consumível" className="dish-image" />
+      <div className="dish-mask">
+        <img src={image} alt="Foto do consumível" className="dish-image" />
+      </div>
       
       <button onClick={redirectToDishDetails}>
         <h3>

@@ -4,10 +4,11 @@ export const Container = styled.div`
   padding-block: 1.6rem;
   width: 36rem;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: 1.3rem;
 
-  > img {
+  .item-image {
     width: 10rem;
     height: 10rem;
   }

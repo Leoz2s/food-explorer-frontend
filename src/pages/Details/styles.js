@@ -60,22 +60,21 @@ export const Dish = styled.div`
     }
   }
 
-  > img {
+  .item-image {
     align-self: center;
-
-    margin-block: 1.6rem;
 
     width: 26.4rem;
     height: 26.4rem;
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto 1fr;
     gap: 4.7rem;
 
     margin-top: 4.2rem;
 
-    > img {
+    .item-image {
       width: 39rem;
       height: 38.9rem;
     }

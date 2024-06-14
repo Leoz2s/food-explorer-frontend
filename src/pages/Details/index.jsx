@@ -50,7 +50,9 @@ export function Details() {
         <ButtonText Icon={CaretLeftIcon} text="voltar" onClick={handleReturn} />
 
         <Dish>
-          <img src={image} alt="Foto do prato" />
+          <div className="dish-mask item-image">
+            <img src={image} alt="Foto do prato" className="item-image" />
+          </div>
 
           <DishInfosAndActions>
             <div className="dish-info">
