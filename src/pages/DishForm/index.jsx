@@ -31,6 +31,7 @@ export function DishForm() {
   const [description, setDescription] = useState("");
   
   function handleReturn() {
+    setEditingDish(true);
     navigate(-1);
   };
 
@@ -158,12 +159,11 @@ export function DishForm() {
       };
     };
     createOrEditDish();
-
-  }, []);
+  }, [editingDish]);
 
   return(
     <Container >
-      <Header />
+      <Header newDishToggle={setEditingDish} />
 
       <Main>
         <ButtonText Icon={CaretLeftIcon} text="voltar" onClick={handleReturn} />

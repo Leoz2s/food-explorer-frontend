@@ -14,7 +14,7 @@ import logo from "../../assets/icons/Polygon.svg";
 import ReceiptIcon from "../../assets/icons/Receipt.svg";
 import SignOutIcon from "../../assets/icons/SignOut.svg";
 
-export function Header({onSearch, updateItemsQuantity, ...rest}) {
+export function Header({onSearch, updateItemsQuantity, newDishToggle, ...rest}) {
   const navigate = useNavigate();
   const {user, signOut} = useAuth();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -35,6 +35,7 @@ export function Header({onSearch, updateItemsQuantity, ...rest}) {
     navigate("/check-out");
   };
   function handleRedirectToNewDish() {
+    newDishToggle && newDishToggle(false);
     navigate("/new-dish");
   };
 
