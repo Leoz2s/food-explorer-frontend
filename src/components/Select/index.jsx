@@ -6,7 +6,7 @@ import CheckCircle from "../../assets/icons/CheckCircle.svg";
 
 import { Container, CategorySelect, SelectButton, SelectedValue, Chevrons, OptionsList } from './styles';
 
-export function Select({Circle, Id, CurrentOption, OptionsToSelect, onSelect, isConsumable, ...rest}) {
+export function Select({Circle, Id, CurrentOption, OptionsToSelect, onSelect, isConsumable, updateComponent, ...rest}) {
   const [options, setOptions] = useState(["Opção 1", "Opção 2"]);
   const [optionSelected, setOptionSelected] = useState("Pendente");
   
@@ -29,7 +29,7 @@ export function Select({Circle, Id, CurrentOption, OptionsToSelect, onSelect, is
   useState(() => {
     setOptions(OptionsToSelect);
     setOptionSelected(CurrentOption || options[0]);
-  }, []);
+  }, [CurrentOption, updateComponent]);
 
   return(
     <Container {...rest}>

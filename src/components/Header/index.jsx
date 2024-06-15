@@ -48,8 +48,10 @@ export function Header({onSearch, updateItemsQuantity, newDishToggle, ...rest}) 
     const storedItems = localStorage.getItem("@food-explorer:cart");
     const allItems = JSON.parse(storedItems);
     let itemsCount = 0;
-    allItems.forEach(item => itemsCount = itemsCount + item[0]);
-    setItemsQuantity(itemsCount);
+    if(allItems) {
+      allItems.forEach(item => itemsCount = itemsCount + item[0]);
+      setItemsQuantity(itemsCount);
+    };
   };
 
   useEffect(() => {

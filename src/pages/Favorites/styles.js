@@ -12,10 +12,21 @@ export const Container = styled.div`
 `;
 
 export const Main = styled.main`
-  justify-self: center;
+  justify-self: left;
 
   padding-top: 5.6rem;
   padding-left: 3.5rem;
+
+  animation: opacity-0-1 1s ease-in-out;
+  @keyframes opacity-0-1 {
+    0% {
+      opacity: 0;
+      transform: translateY(5%);
+    }
+    100% {
+      opacity: 1;
+    }
+  };
 
   > #favorites-dishes-group {
     width: fit-content;

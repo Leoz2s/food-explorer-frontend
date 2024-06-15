@@ -43,7 +43,12 @@ export function OrderHistory() {
     const [dateNumbers, hoursNumbers] = date.split(" ");
     const [year, month, day] = dateNumbers.split("-");
     const [hours, minutes, seconds] = hoursNumbers.split(":");
-    const timeZoneHours = (Number(hours) - 3)
+
+    let timeZoneHours;
+    if(hours == 2) {timeZoneHours = 23;}
+      else if(hours == 1) {timeZoneHours = 22;}
+      else if(hours == 0) {timeZoneHours = 21;}
+      else {timeZoneHours = (Number(hours) - 3);};
 
     return `${day}/${month} às ${timeZoneHours}h${minutes}`;
   };
@@ -70,34 +75,6 @@ export function OrderHistory() {
       setOrdersData(data);
     };
     fetchOrders();
-
-    // setOrdersData([
-    //   {
-    //     id: "000004",
-    //     status: "Pendente",
-    //     description: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
-    //     created_at: "20/05 às 18h00",
-    //   },
-    //   {
-    //     id: "000003",
-    //     status: "Preparando",
-    //     description: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
-    //     created_at: "20/05 às 18h00",
-    //   },
-    //   {
-    //     id: "000002",
-    //     status: "Entregue",
-    //     description: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
-    //     created_at: "20/05 às 18h00",
-    //   },
-    //   {
-    //     id: "000001",
-    //     status: "Entregue",
-    //     description: "1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá",
-    //     created_at: "20/05 às 18h00",
-    //   },
-    // ]);
-
   }, []);
   
   return(

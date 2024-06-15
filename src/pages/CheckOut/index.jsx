@@ -25,7 +25,7 @@ export function CheckOut() {
       const itemPrice = item[1].price.replace(",", ".");
       const [ , itemPriceString] = itemPrice.split("R$ ");
       const itemPriceNumber = Number(itemPriceString);
-      totalPrice = totalPrice + itemPriceNumber;
+      totalPrice = totalPrice + (itemPriceNumber * item[0]);
     });
 
     totalPrice = `R$ ${totalPrice.toFixed(2)}`.replace(".", ",");
@@ -38,7 +38,22 @@ export function CheckOut() {
 
   useEffect(() => {
     const storedItems = localStorage.getItem("@food-explorer:cart");
-    const allItems = JSON.parse(storedItems);
+    let allItems = JSON.parse(storedItems);
+
+    const allItemsContent = allItems.map(item => item[1].id);
+    allItems.forEach((item, index) => {
+      const allItemsQuantities = allItems.map(item => item[0]);
+
+      const sameItemAlreadyExists = allItemsContent.indexOf(item[1].id) !== index;
+      if(sameItemAlreadyExists) {
+        const indexOfSameItem = allItemsContent.indexOf(item[1].id);
+        const itemQuantity = allItemsQuantities[indexOfSameItem];
+        allItems[indexOfSameItem][0] = itemQuantity + item[0];
+        allItems[index] = "deleted";
+      };
+    });
+    allItems = allItems.filter(item => item !== "deleted");
+
     setItems(allItems);
 
     let itemsOrderDescription = "";

@@ -68,6 +68,14 @@ export const Table = styled.div`
   border: 2px solid ${({theme}) => theme.DARK.DARK_1000};
   border-radius: 8px;
 
+  animation: translate-y-x 1.5s ease-in-out;
+  @keyframes translate-y-x {
+    0% {
+      transform: translateY(5%);
+      transform: translateX(-1.5%);
+    }
+  };
+
   > div:last-child {
     > div {
       border-bottom: 0;

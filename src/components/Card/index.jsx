@@ -73,7 +73,7 @@ export function Card({data, updateItemsQuantity, ...rest}) {
         </button>
       }
 
-      <div className="dish-mask">
+      <div className="dish-mask dish-image">
         <img src={image} alt="Foto do consumível" className="dish-image" />
       </div>
       
