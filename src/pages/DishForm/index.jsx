@@ -155,6 +155,7 @@ export function DishForm() {
         setIngredients(response.data.ingredients);  
       }else {
         setEditingDish(false);
+        setIngredients([]);
       };
     };
     createOrEditDish();
@@ -181,14 +182,14 @@ export function DishForm() {
               <p>Nome</p>
               <Input 
                 type="text" 
-                placeholder={editingDish ? data.name : "Ex.: Salada Ceasar"}
+                placeholder={editingDish ? data.name : "Ex.: Salada Caesar"}
                 onChange={e => setName(e.target.value)}
               />
             </div>
 
             <div className="input-wrap category-input">
               <p>Categoria</p>
-
+              
               <Select id="select" onSelect={setCategory} isConsumable
                 CurrentOption={category} OptionsToSelect={["Refeição", "Sobremesa", "Bebida"]} 
               />
