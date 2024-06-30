@@ -14,14 +14,19 @@ Este é o repositório do frontend da aplicação, para acessar o repositório d
 
 
 ## Features ✨
-- Criar um cadastro na aplicação; (Cadastro de usuário no banco de dados)
-- Fazer login; (Autenticação na aplicação)
-- Visualizar pratos. 
-- Busca de pratos pelo nome e por ingredietes.
+- Criar um cadastro na aplicação (Cadastro de usuário no banco de dados);
+- Fazer login (Autenticação na aplicação);
+- Visualizar pratos;
+- Busca de pratos pelo nome e por ingredientes;
+- Visualizar ordens de pedidos e seus status.
 
-Exclusivo para Admin:
+Exclusivo para Customers (clientes):
+- Favoritar pratos e visualizar a lista de pratos favoritos;
+- Fazer check-out (Visualizar a soma de produtos e os valores, podendo excluir produtos do pedido e criar uma ordem de pedido).
+
+Exclusivo para Admins (administradores):
 - Criar pratos; Editar pratos; Excluir pratos.
-
+- Alterar o status de uma ordem de pedido.
 
 
 ## Tech Stack & Dependências 🛠
@@ -67,5 +72,3 @@ git clone https://github.com/Leoz2s/food-explorer-frontend.git
   npm run dev
 ```
 Com a aplicação rodando em seu ambiente local, ela está disponível para seu uso.
-
-
